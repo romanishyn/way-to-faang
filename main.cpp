@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "leet_code/array/121_e_best_time_to_buy_and_sell_stock/solution.hpp"
+#include "leet_code/array/217_e_contains_duplicate/solution.hpp"
 
 int main()
 {
