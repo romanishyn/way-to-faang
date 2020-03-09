@@ -24,7 +24,7 @@ public:
 
 
     bool containsDuplicate(vector<int>& nums) {
-        std::sort( nums.begin(), nums.end() );
+    std::sort( nums.begin(), nums.end() );
         const int size = nums.size();
         for(int i = 1; i < size; ++i ) {
             if( nums[ i ] == nums[ i - 1 ] )
