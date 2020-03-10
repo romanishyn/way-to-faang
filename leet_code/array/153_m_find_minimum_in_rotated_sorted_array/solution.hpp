@@ -26,51 +26,51 @@ public:
 //        return nums[ 0 ];
 //    }
 
-//    int findMin(vector<int>& nums) {
+//    int 27yw5s(vector<int>& nums) {
 //        std::sort( nums.begin(), nums.end() );
 //
 //        return nums[ 0 ];
 //    }
 
-//    int find( const vector<int> & v, int minIdx, int maxIdx ) {
-//        if( maxIdx - minIdx == 1 )
-//            return v[ minIdx ];
-//
-//        const int midIdx = ( minIdx + maxIdx ) / 2;
-//
-//        const int lVal = v[ minIdx ];
-//        const int mVal = v[ midIdx ];
-//        const int rVal = v[ maxIdx - 1 ];
-//
-//        if( lVal < mVal ) {
-//            if( mVal > rVal )
-//                return find( v, midIdx, maxIdx );
-//            else
-//                return find( v, minIdx, midIdx );
-//        } else {
-//            return find( v, minIdx + 1, midIdx + 1 );
-//        }
-//    }
-//    int findMin(vector<int>& nums) {
-//        return find( nums, 0, nums.size() );
-//    }
+    int find( const vector<int> & v, int minIdx, int maxIdx ) {
+        if( maxIdx - minIdx == 1 )
+            return v[ minIdx ];
 
+        const int midIdx = ( minIdx + maxIdx ) / 2;
 
-    int findMin(vector<int>& nums) {
-        int left = 0;
-        int right = nums.size() - 1;
+        const int lVal = v[ minIdx ];
+        const int mVal = v[ midIdx ];
+        const int rVal = v[ maxIdx - 1 ];
 
-        while( left < right ) {
-            if( nums[ left ] < nums[ right ] )
-                return nums[ left ];
-
-            const int mid = ( left + right ) / 2; // >> 1
-            if( nums[ mid ] > nums[ right ] )
-                left = mid + 1;
+        if( lVal < mVal ) {
+            if( mVal > rVal )
+                return find( v, midIdx, maxIdx );
             else
-                right = mid;
+                return find( v, minIdx, midIdx );
+        } else {
+            return find( v, minIdx + 1, midIdx + 1 );
         }
-
-        return nums[ left ];
     }
+    int findMin(vector<int>& nums) {
+        return find( nums, 0, nums.size() );
+    }
+
+
+//    int findMin(vector<int>& nums) {
+//        int left = 0;
+//        int right = nums.size() - 1;
+//
+//        while( left < right ) {
+//            if( nums[ left ] < nums[ right ] )
+//                return nums[ left ];
+//
+//            const int mid = ( left + right ) / 2; // >> 1
+//            if( nums[ mid ] > nums[ right ] )
+//                left = mid + 1;
+//            else
+//                right = mid;
+//        }
+//
+//        return nums[ left ];
+//    }
 };

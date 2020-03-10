@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/maximum-product-subarray/
+
 #pragma once
 
 #include <vector>
@@ -7,48 +9,56 @@ using std::vector;
 
 class Solution {
 public:
-//    int maxProfit(vector<int>& prices) {
-//        int profit = 0;
-//        const int size = prices.size();
-//        for( int i = 0; i < size; ++i ) {
-//            for( int j = i + 1; j < size; ++j ) {
-//                const int tempProfit = prices[j] - prices[i];
-//                if( tempProfit > profit )
-//                    profit = tempProfit;
-//            }
+    // Wrong
+//    int maxProduct(vector<int>& nums) {
+//        int curMax = nums[ 0 ];
+//        int maxProd = curMax;
+//
+//        for( int i = 1; i < nums.size(); ++i ) {
+//            const int temp = curMax * nums[ i ];
+//
+//            if( temp > curMax )
+//                curMax = temp;
+//            else
+//                curMax = nums[ i ];
+//
+//            maxProd = std::max( curMax, maxProd );
 //        }
 //
-//        return profit;
+//        return maxProd;
 //    }
 
-//    int maxProfit(vector<int>& prices) {
-//        int cheapest = std::numeric_limits< int >::max();
-//        int profit = 0;
+//    [2,-5,-2,-4,3] -> 24
+//    [-2, 0, -1] -> 0
+//    int maxProduct(vector<int>& nums) {
+//        int totalProd = 1;
+//        int currProd = 1;
+//        int maxProd = std::numeric_limits< int >::min();
 //
-//        const int size = prices.size();
-//        for( int i = 1; i < size; ++i ) {
-//            const int prevPrice = prices[ i - 1 ];
-//            if( cheapest > prevPrice )
-//                cheapest = prevPrice;
+//        for( int x : nums ) {
+//            currProd = std::max( x, currProd * x );
 //
-//            const int tempProfit = prices[ i ] - cheapest;
-//            if( tempProfit > profit )
-//                profit = tempProfit;
+//            if( totalProd == 0 )
+//                totalProd = x;
+//            else
+//                totalProd *= x;
+//
+//            maxProd = std::max( maxProd, std::max( currProd, totalProd ) );
 //        }
 //
-//        return profit;
+//        return maxProd;
 //    }
 
-    int maxProfit(vector<int>& prices) {
-        int minPrice = std::numeric_limits<int>::max();
-        int profit = 0;
-
-        const int size = prices.size();
-        for( int i = 1; i < size; ++ i ) {
-            minPrice = std::min( minPrice, prices[ i - 1 ] );
-            profit = std::max( profit, prices[ i ] - minPrice );
+    int maxProduct(vector<int>& nums) {
+        int maxProd = std::numeric_limits< int >::min();
+        for( int i = 0; i < nums.size(); ++i ) {
+            int currProd = 1;
+            for( int j = i; j < nums.size(); ++j ) {
+                currProd *= nums[ j ];
+                maxProd = std::max( maxProd, currProd );
+            }
         }
 
-        return profit;
+        return maxProd;
     }
 };
