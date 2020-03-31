@@ -49,14 +49,30 @@ public:
 //        return maxProd;
 //    }
 
+//    int maxProduct(vector<int>& nums) {
+//        int maxProd = std::numeric_limits< int >::min();
+//        for( int i = 0; i < nums.size(); ++i ) {
+//            int currProd = 1;
+//            for( int j = i; j < nums.size(); ++j ) {
+//                currProd *= nums[ j ];
+//                maxProd = std::max( maxProd, currProd );
+//            }
+//        }
+//
+//        return maxProd;
+//    }
+
     int maxProduct(vector<int>& nums) {
         int maxProd = std::numeric_limits< int >::min();
-        for( int i = 0; i < nums.size(); ++i ) {
-            int currProd = 1;
-            for( int j = i; j < nums.size(); ++j ) {
-                currProd *= nums[ j ];
-                maxProd = std::max( maxProd, currProd );
-            }
+        int leftProduct = 1;
+        int rightProduct = 1;
+
+        const int size = nums.size();
+        for( int i = 0, j = size - 1; i < size; ++i, --j ) {
+            leftProduct = leftProduct ? leftProduct * nums[ i ] : nums[ i ];
+            rightProduct = rightProduct ? rightProduct * nums[ j ] : nums[ j ];
+
+            maxProd = std::max( maxProd, std::max( leftProduct, rightProduct ) );
         }
 
         return maxProd;
