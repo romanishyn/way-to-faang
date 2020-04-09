@@ -1,5 +1,7 @@
 /*
 https://leetcode.com/problems/longest-increasing-subsequence/
+
+ https://www.youtube.com/watch?v=fV-TF4OvZpk
 */
 
 #pragma once
@@ -10,6 +12,7 @@ https://leetcode.com/problems/longest-increasing-subsequence/
 using std::vector;
 
 /*
+ *
  * TODO:
  * - impl recursion approach
  * - impl nlog(n)

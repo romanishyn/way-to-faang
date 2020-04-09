@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "leet_code/dynamic_programming/139_m_word_break/solution.hpp"
+#include "leet_code/dynamic_programming/377_m_combination_sum_iv/solution.hpp"
 
 #include <vector>
 #include <iostream>
@@ -10,11 +10,6 @@
 int main()
 {
     Solution solution;
-
-    std::string s = "applepenapple";
-    vector<string> wordDict = { "apple", "pen" };
-
-    std::cout << "Result: " << std::boolalpha << solution.wordBreak( s, wordDict ) << std::endl;
 
     return 0;
 }
