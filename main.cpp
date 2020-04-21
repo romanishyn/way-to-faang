@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "leet_code/dynamic_programming/91_m_decode_ways/solution.hpp"
+#include "leet_code/dynamic_programming/55_m_jump_game/solution.hpp"
 
 #include <vector>
 #include <iostream>
