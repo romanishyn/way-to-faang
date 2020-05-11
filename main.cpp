@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "leet_code/graph/417_m_pacific_atlantic_water_flow/solution.hpp"
+#include "leet_code/graph/130_m_surrounded_regions/solution.hpp"
 
 #include <vector>
 #include <iostream>
@@ -9,25 +9,27 @@
 
 int main()
 {
-//    Graph graph{
-//                { 2 }
-//            ,   { 2, 3 }
-//            ,   { 4 }
-//            ,   { 5 }
-//            ,   { 5 }
-//            ,   { 6 }
-//            ,   {}
-//    };
-//
-//    Vector vector = sortDfs( graph );
-//
-//    for( int v : vector )
-//        std::cout << v << ", ";
-//    std::cout << std::endl;
-//
-//    vector = sortBfs( graph );
-//    for( int v : vector )
-//        std::cout << v << ", ";
-//    std::cout << std::endl;
+//    vector< vector< char >> board =
+//        {{'O','O','O','O','X','X'}
+//        ,{'O','O','O','O','O','O'}
+//        ,{'O','X','O','X','O','O'}
+//        ,{'O','X','O','O','X','O'}
+//        ,{'O','X','O','X','O','O'}
+//        ,{'O','X','O','O','O','O'}};
+
+    vector< vector< char >> board =
+            {{'X','O','X','O','X','O'},
+             {'O','X','O','X','O','X'},
+             {'X','O','X','O','X','O'},
+             {'O','X','O','X','O','X'}};
+
+    vector< vector< char >> board3 =
+            {{'O','X','X','O','X'},
+             {'X','O','O','X','O'},
+             {'X','O','X','O','X'},
+             {'O','X','O','O','O'},
+             {'X','X','O','X','O'}};
+    Solution solution;
+    solution.solve( board3 );
 }
 
