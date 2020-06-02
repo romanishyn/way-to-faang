@@ -3,4 +3,7 @@ project(faang)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable( ${PROJECT_NAME} main.cpp)
+file(GLOB_RECURSE FILES
+    *.hpp)
+
+add_executable( ${PROJECT_NAME} main.cpp ${FILES})
