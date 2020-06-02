@@ -1,35 +1,21 @@
 #include <iostream>
 
-#include "leet_code/graph/130_m_surrounded_regions/solution.hpp"
+#include "leet_code/graph/128_h_longest_consecutive_sequence/solution.hpp"
 
 #include <vector>
 #include <iostream>
 #include <iomanip>
 #include <unordered_set>
+#include <cassert>
+
 
 int main()
 {
-//    vector< vector< char >> board =
-//        {{'O','O','O','O','X','X'}
-//        ,{'O','O','O','O','O','O'}
-//        ,{'O','X','O','X','O','O'}
-//        ,{'O','X','O','O','X','O'}
-//        ,{'O','X','O','X','O','O'}
-//        ,{'O','X','O','O','O','O'}};
+    V4::Solution solution;
 
-    vector< vector< char >> board =
-            {{'X','O','X','O','X','O'},
-             {'O','X','O','X','O','X'},
-             {'X','O','X','O','X','O'},
-             {'O','X','O','X','O','X'}};
+    vector< int > v { 100,4,200,1,3,2 };
+    std::cout << "RESULT: " << solution.longestConsecutive( v ) << std::endl;
 
-    vector< vector< char >> board3 =
-            {{'O','X','X','O','X'},
-             {'X','O','O','X','O'},
-             {'X','O','X','O','X'},
-             {'O','X','O','O','O'},
-             {'X','X','O','X','O'}};
-    Solution solution;
-    solution.solve( board3 );
+    return 0;
 }
 
