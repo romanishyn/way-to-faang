@@ -27,12 +27,16 @@ May
 
 June
 02.06 - 128, 1267, 226
+02.07 - 57
 
 Done with help:
-238, 53, 139, 337, 198, 213, 91, 207, 417, 128
+238, 53, 139, 337, 198, 213, 91, 207, 417, 128, 57
 
 Done by myself but need attention:
 62
 
 Need to be done:
-15, 268, 322, 1143, 300, 227
+15, 268, 322, 1143, 300, 227, 57
+
+Learn:
+lower_bound, upper_bound, equal_range
