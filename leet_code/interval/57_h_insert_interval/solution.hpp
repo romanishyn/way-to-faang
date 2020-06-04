@@ -22,7 +22,6 @@ public:
             ++idx;
         }
 
-        bool flag = true;
         // newInterval part, insert newInterval (with or without merge)
         while( idx < intervals.size() && intervals[ idx ][ 0 ] <= newInterval[ 1 ] ) {
             newInterval[ 0 ] = std::min( newInterval[ 0 ], intervals[ idx ][ 0 ] );
@@ -57,14 +56,6 @@ public:
 
         auto itr1 = range.first;
         auto itr2 = range.second;
-
-        for( int x : *itr1 )
-            std::cout << x << " ";
-        std::cout << std::endl;
-
-        for( int x : *itr2 )
-            std::cout << x << " ";
-        std::cout << std::endl;
 
         if (itr1 == itr2) {
             intervals.insert(itr1, newInterval);
