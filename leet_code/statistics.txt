@@ -31,15 +31,17 @@ June
 04.06 - 56, 435, 334
 05.06 - 206, 141
 06.06 - 21
+09.06 - 23
 
 Done with help:
 238, 53, 139, 337, 198, 213, 91, 207, 417, 128, 57, 1029, 435
 
 Done by myself but need attention:
-62, 206, 141
+62, 206, 141, 23
 
 Need to be done:
-15, 268, 322, 1143, 300, 227, 57
+15, 268, 322, 1143, 300, 227, 57, 518
+https://leetcode.com/problems/permutations/discuss/18239/a-general-approach-to-backtracking-questions-in-java-subsets-permutations-combination-sum-palindrome-partioning
 
 Learn:
 lower_bound, upper_bound, equal_range
