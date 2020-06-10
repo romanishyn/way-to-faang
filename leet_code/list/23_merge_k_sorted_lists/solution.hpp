@@ -10,6 +10,8 @@ https://leetcode.com/problems/merge-k-sorted-lists/
 
 using std::vector;
 
+// TODO: impl Divide and Conquer without recursion
+
 //  Definition for singly-linked list.
   struct ListNode {
       int val;
