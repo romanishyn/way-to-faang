@@ -8,18 +8,22 @@
 #include <unordered_set>
 #include <cassert>
 
-
 int main()
 {
-    V1::Solution solution;
+    bool arr[ 10 ] = { };
 
-    std::vector< ListNode * > vector1{
-        new ListNode( 1, new ListNode( 4, new ListNode( 5 ) ) ),
-        new ListNode( 1, new ListNode( 3, new ListNode( 4 ) ) ),
-        new ListNode( 2, new ListNode( 6 ) )
-    };
+    for( bool x : arr )
+        std::cout << x << std::endl;
 
-    solution.mergeKLists( vector1 );
+//    V1::Solution solution;
+//
+//    std::vector< ListNode * > vector1{
+//        new ListNode( 1, new ListNode( 4, new ListNode( 5 ) ) ),
+//        new ListNode( 1, new ListNode( 3, new ListNode( 4 ) ) ),
+//        new ListNode( 2, new ListNode( 6 ) )
+//    };
+//
+//    solution.mergeKLists( vector1 );
     return 0;
 }
 
