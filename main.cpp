@@ -10,11 +10,8 @@
 
 int main()
 {
-    bool arr[ 10 ] = { };
-
-    for( bool x : arr )
-        std::cout << x << std::endl;
-
+    std::string str= "abcd";
+    std::cout << str.substr( 1, 2 );
 //    V1::Solution solution;
 //
 //    std::vector< ListNode * > vector1{
@@ -26,4 +23,3 @@ int main()
 //    solution.mergeKLists( vector1 );
     return 0;
 }
-
