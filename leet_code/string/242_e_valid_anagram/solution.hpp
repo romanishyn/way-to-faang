@@ -7,6 +7,7 @@ https://leetcode.com/problems/valid-anagram/
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <functional>
 
 using std::string;
 using std::vector;
@@ -93,3 +94,24 @@ public:
     }
 };
 } // namespace V3
+
+namespace V4 {
+/*
+ * */
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        return getHash( s ) == getHash( t );
+    }
+
+private:
+    std::size_t getHash( const std::string& str ) {
+        std::hash< std::string >{};
+        std::size_t hash = 0;
+        for( char c : str )
+            hash ^= std::hash< char >{}( c ) + 0x9e3779b9 + (hash<<6) + (hash>>2);
+
+        return hash;
+    }
+};
+} // namespace V4
