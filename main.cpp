@@ -11,7 +11,8 @@
 int main()
 {
     std::string str= "abcd";
-    std::cout << str.substr( 1, 2 );
+    std::string::npos;
+    std::cout << str.substr( 1, 0 );
 //    V1::Solution solution;
 //
 //    std::vector< ListNode * > vector1{
