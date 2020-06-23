@@ -2,25 +2,24 @@
 
 #include "leet_code/list/23_merge_k_sorted_lists/solution.hpp"
 
-#include <vector>
+// extract to string
 #include <iostream>
-#include <iomanip>
-#include <unordered_set>
-#include <cassert>
+#include <string>
+#include <sstream>
 
-int main()
+int main ()
 {
-    std::string str= "abcd";
-    std::string::npos;
-    std::cout << str.substr( 1, 0 );
-//    V1::Solution solution;
-//
-//    std::vector< ListNode * > vector1{
-//        new ListNode( 1, new ListNode( 4, new ListNode( 5 ) ) ),
-//        new ListNode( 1, new ListNode( 3, new ListNode( 4 ) ) ),
-//        new ListNode( 2, new ListNode( 6 ) )
-//    };
-//
-//    solution.mergeKLists( vector1 );
+    std::string name;
+
+    std::stringstream stream( "" );
+
+    std::cout << (stream ? "1 t" : "1 f" ) << std::endl;
+    std::getline (stream,name, ',');
+    std::cout << (stream ? "2 t" : "2 f" ) << std::endl;
+    std::getline (stream,name, ',');
+    std::cout << (stream ? "3 t" : "3 f" ) << std::endl;
+
+    std::cout << "Hello, " << name << "!\n";
+
     return 0;
 }
