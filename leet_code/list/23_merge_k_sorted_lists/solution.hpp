@@ -105,3 +105,53 @@ public:
     }
 };
 } // namespace V2
+
+namespace V3 {
+/*
+ * The main idea is using the Device and Conquer approach to merge all lists to one.
+ *
+ * Time (Nlogk), where N is total count of nodes, k is count of list (size of lists)
+ * Space (1)
+ * */
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        int length = lists.size();
+        if( length == 0 )
+            return nullptr;
+
+        while( length > 1 ) {
+            int shift = ( length + 1 ) / 2;
+            for( int i = 0; i < length / 2; ++i )
+                lists[ i ] = mergeLists( lists[ i ], lists[ i + shift ] );
+
+            length = shift;
+        }
+
+        return lists[ 0 ];
+    }
+
+private:
+    ListNode* mergeLists( ListNode* l1, ListNode* l2 ) {
+        ListNode dummy;
+        ListNode* current = &dummy;
+
+        while( l1 && l2 ) {
+            if( l1->val < l2->val ) {
+                current->next = l1;
+                l1 = l1->next;
+            }
+            else {
+                current->next = l2;
+                l2 = l2->next;
+            }
+
+            current = current->next;
+        }
+
+        current->next = l1 ? l1 : l2;
+
+        return dummy.next;
+    }
+};
+} // namespace V3
