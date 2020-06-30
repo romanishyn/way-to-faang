@@ -12,67 +12,39 @@ using std::vector;
 
 namespace V1 {
 /*
- * i
- * i + 1
+ * Idea is to start from each center for even and odd length and expand around center. If current palindrome
+ * longer than previous ones, updated start and maxLength. At the end return substirng using this variable.
  *
- * Time (n^2)
- * Space (1)
+ * Time (N^2)
+ * Space (1), or (N) if count return value
  * */
 class Solution {
 public:
     string longestPalindrome(string s) {
-        int len = s.size();
-        if( s.size() < 2 )
-            return s;
+        int start = 0;
+        int maxLength = 0;
 
-        for( int i = 0; i < s.size() - 1; ++i ) {
-            expandFromMiddle( s, i, i );
-            expandFromMiddle( s, i, i + 1 );
+        for( int i = 0; i < s.size(); ++i ) {
+            const int length1 = expandAroundCenter( s, i, i );
+            const int length2 = expandAroundCenter( s, i, i + 1 );
+
+            const int length = std::max( length1, length2 );
+            if( length > maxLength ) {
+                maxLength = length;
+                start = i - ( length - 1 ) / 2;
+            }
         }
 
-        return s.substr( m_start, m_start + m_length );
+        return s.substr( start, maxLength );
     }
 
-private:
-    void expandFromMiddle( const std::string & s, int left, int right ) {
+    int expandAroundCenter( const std::string& s, int left, int right ) const {
         while( left >= 0 && right < s.size() && s[ left ] == s[ right ] ) {
             --left;
             ++right;
         }
 
-        if( m_length < right - left - 1 ) {
-            m_start = left + 1;
-            m_length = right - left - 1;
-        }
+        return right - left - 1;
     }
-
-private:
-    int m_start = 0;
-    int m_length = 0;
 };
 } // namespace V1
-public class Solution {
-private int lo, maxLen;
-
-public String longestPalindrome(String s) {
-        int len = s.length();
-        if (len < 2)
-            return s;
-
-        for (int i = 0; i < len-1; i++) {
-            extendPalindrome(s, i, i);  //assume odd length, try to extend Palindrome as possible
-            extendPalindrome(s, i, i+1); //assume even length.
-        }
-        return s.substring(lo, lo + maxLen);
-    }
-
-private void extendPalindrome(String s, int j, int k) {
-        while (j >= 0 && k < s.length() && s.charAt(j) == s.charAt(k)) {
-            j--;
-            k++;
-        }
-        if (maxLen < k - j - 1) {
-            lo = j + 1;
-            maxLen = k - j - 1;
-        }
-    }}
