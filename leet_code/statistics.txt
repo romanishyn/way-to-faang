@@ -51,7 +51,7 @@ June
 30.06 - 347, 295, 647, 5
 
 July
-01.07 - 15
+01.07 - 15, 268
 
 Done with help:
 238, 53, 139, 337, 198, 213, 91, 207, 417, 128, 57, 1029, 435, 54, 424, 76, 297, 235, 208, 295, 5
@@ -60,7 +60,7 @@ Done by myself but need attention:
 62, 206, 141, 23, 105, 98, 230
 
 Need to be done:
-268, 322, 1143, 300, 227, 57, 518
+322, 1143, 300, 227, 57, 518
 https://leetcode.com/problems/permutations/discuss/18239/a-general-approach-to-backtracking-questions-in-java-subsets-permutations-combination-sum-palindrome-partioning
 
 Learn:

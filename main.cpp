@@ -21,6 +21,7 @@ struct Functor {
 
 int main ()
 {
+    V2::wordCountEngine( "Practice makes perfect, you'll get perfecT by practice. just practice! just just just!!" );
     std::vector< int > v( 0 );
 
     std::cout << "size: " << v.size() << std::endl;
