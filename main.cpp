@@ -12,6 +12,7 @@
 #include <memory>
 #include <cassert>
 #include <set>
+#include <string_view>
 
 struct Functor {
     bool operator ()( int lhs, int rhs ) {
@@ -21,10 +22,9 @@ struct Functor {
 
 int main ()
 {
-    V2::wordCountEngine( "Practice makes perfect, you'll get perfecT by practice. just practice! just just just!!" );
-    std::vector< int > v( 0 );
+    std::string_view text( "text" );
+    std::cout << "p: " << text.substr( 1, text.size() ) << std::endl;
 
-    std::cout << "size: " << v.size() << std::endl;
 
     return 0;
 }
