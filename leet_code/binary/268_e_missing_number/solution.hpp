@@ -7,6 +7,7 @@ https://leetcode.com/problems/missing-number/
 #include <vector>
 #include <algorithm>
 #include <functional>
+#include <numeric>
 
 using std::vector;
 
@@ -58,3 +59,22 @@ public:
     }
 };
 } // namespace V2
+
+namespace V3 {
+/*
+ * The main idea is using Gauss's formula
+ *
+ * N - size of nums
+ * Time (N)
+ * Space (1)
+ * */
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        const long expectedSum = nums.size() * ( nums.size() + 1 ) / 2;
+        long actualSum = std::accumulate( nums.begin(), nums.end(), long{} );
+
+        return static_cast< int >( expectedSum - actualSum );
+    }
+};
+} // namespace V3
