@@ -52,6 +52,7 @@ June
 
 July
 01.07 - 15, 268
+02.07 - 441
 
 Done with help:
 238, 53, 139, 337, 198, 213, 91, 207, 417, 128, 57, 1029, 435, 54, 424, 76, 297, 235, 208, 295, 5
@@ -65,3 +66,4 @@ https://leetcode.com/problems/permutations/discuss/18239/a-general-approach-to-b
 
 Learn:
 lower_bound, upper_bound, equal_range
+lower_bound: https://leetcode.com/articles/search-insert-position/
