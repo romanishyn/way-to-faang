@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "pramp/word_count_engine/solution.hpp"
-#include "leet_code/array/15_m_3Sum/solution.hpp"
+#include "leet_code/array/957_m_prison_cells_after_n_days/solution.hpp"
 
 #include "leet_code/design/trie.hpp"
 
@@ -22,8 +22,10 @@ struct Functor {
 
 int main ()
 {
-    std::string_view text( "text" );
-    std::cout << "p: " << text.substr( 1, text.size() ) << std::endl;
+    V1::Solution solution;
+    std::vector<int> cells{0,1,0,1,1,0,0,1 };
+    solution.prisonAfterNDays( cells, 7 );
+
 
 
     return 0;

@@ -14,11 +14,10 @@ namespace V1 {
  *
  * */
 vector<string> split( const std::string& document ) {
-    vector<string> tokens;
+    vector<string> words;
 
-    std::string token;
-    std::stringstream ss( document );
-    while( std::getline( ss, token, ' ' ) ) {
+    std::istringstream iss( document );
+    for( std::string token; std::getline( iss, token, ' ' ); ) {
         std::string word;
         for( char c : token ) {
             if( std::isalpha( c ) )
@@ -26,10 +25,10 @@ vector<string> split( const std::string& document ) {
         }
 
         if( !word.empty() )
-            tokens.push_back( std::move( word ) );
+            words.push_back( std::move( word ) );
     }
 
-    return tokens;
+    return words;
 }
 
 vector<vector<string>> wordCountEngine( const string& document )
@@ -47,6 +46,7 @@ vector<vector<string>> wordCountEngine( const string& document )
         ++pair.first->second;
     }
 
+    // Sorting a [word, occurrences] pairs by a number of words' occurrences in descending order
     std::map< int, std::vector< std::string >, std::greater<int> > wordRanks;
     for( const auto& word : uniqueWords ) {
         int rank = wordsCount[ word ];
