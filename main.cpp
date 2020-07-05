@@ -20,12 +20,14 @@ struct Functor {
     }
 };
 
+template < typename  T >
+class name;
+
 int main ()
 {
     V1::Solution solution;
     std::vector<int> cells{0,1,0,1,1,0,0,1 };
     solution.prisonAfterNDays( cells, 7 );
-
 
 
     return 0;
