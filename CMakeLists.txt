@@ -4,6 +4,7 @@ project(faang)
 set(CMAKE_CXX_STANDARD 17)
 
 file(GLOB_RECURSE FILES
-    *.hpp)
+    *.hpp
+    *.cpp)
 
 add_executable( ${PROJECT_NAME} main.cpp ${FILES})
