@@ -65,7 +65,7 @@ Done by myself but need attention:
 62, 206, 141, 23, 105, 98, 230, 957
 
 Need to be done:
-227, 57, 518 | 264
+518 | 264, 227 с кем-то нужно, 57 в грокинге разберу,
 https://leetcode.com/problems/permutations/discuss/18239/a-general-approach-to-backtracking-questions-in-java-subsets-permutations-combination-sum-palindrome-partioning
 
 Learn:
