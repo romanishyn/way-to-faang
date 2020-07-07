@@ -46,7 +46,7 @@ namespace V2 {
  *
  * N - length of the digits
  * Time (N), in case of all digits less than 9 it costs O(1)
- * Space (1), since we used only constant amount of space throughour algorithm
+ * Space (1), since we used only constant amount of space throughout the algorithm
  */
 class Solution {
 public:
