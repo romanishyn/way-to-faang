@@ -16,10 +16,10 @@
  (((((
  )))))
 
- 3) Note that in every prefix the number of opening bracket is equal or greater than the number of opening bracket
+ 3) Note that in every prefix the number of opening bracket is equal or greater than the number of closing bracket
  4) Try to walk through example and USE COUNTER in order to count the difference between
     the number of '(' and ')' for each prefix:
-    4.1 every time the counter goes below zero, the current prefix has more open brackets than close brackets, then
+    4.1 every time the counter goes below zero, the current prefix has more close brackets than open brackets, then
         increment the counter by 1, since we must add an additional open brackets to the beginning of the string
         in order to correct the brackets.
     4.2 At the end of the string, if we have found more open than close, we need to add additional close to
