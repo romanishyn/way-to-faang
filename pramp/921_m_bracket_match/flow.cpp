@@ -28,7 +28,7 @@
  5) What does balanced string mean?
  Keep track of the balance of the string: the number of '(''s minus the number of ')''s.
  A string is valid if its balance is 0, plus every prefix has non-negative balance.
-
+))((
      Let's walk through example together,
 ----------------------------------------------------------
   ### LeetCode Solution
