@@ -85,3 +85,40 @@ public:
         return -1;
     }
 };
+
+namespace V1 {
+int search(vector<int>& nums, int target) {
+    if( nums.empty() )
+        return -1;
+
+    int start = 0;
+    int end = nums.size() - 1;
+
+    while( start < end ) {
+        int mid = ( start + end ) >> 1;
+        if( nums[ mid ] > nums[ end ] )
+            start = mid + 1;
+        else
+            end = mid;
+    }
+
+    int shift = start;
+    start = 0;
+    end = nums.size() - 1;
+
+    while( start <= end ) {
+        const int mid = ( start + end ) >> 1;
+        const int realMid = ( mid + shift ) % nums.size();
+
+        if( nums[ realMid ] == target )
+            return realMid;
+
+        if( nums[ realMid ] > target )
+            end = mid - 1;
+        else
+            start = mid + 1;
+    }
+
+    return -1;
+}
+} // namespace V1
