@@ -2,6 +2,10 @@
  * https://leetcode.com/problems/move-zeroes/
  * */
 
+#include <vector>
+
+using std::vector;
+
 namespace V1 {
 /*
  * Solution similar to std::remove algorithm.
