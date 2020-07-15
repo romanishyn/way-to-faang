@@ -25,6 +25,6 @@ class name;
 
 int main ()
 {
-
+    std::cout << (-1 + 3 ) % 3 << std::endl;
     return 0;
 }
