@@ -78,3 +78,34 @@ public:
     }
 };
 } // namespace V3
+
+namespace V4 {
+/*
+ * TODO: why time complexity is O(N) <O(N) + O(N-1)> ?
+ *
+ * Idea is using Cycle Sort
+ *
+ * Time (N)
+ * Space (1)
+ * */
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        const int size = nums.size();
+        int idx = 0;
+        while( idx < size ) {
+            if( nums[ idx ] < size && nums[ idx ] != idx )
+                std::swap( nums[ idx ], nums[ nums[ idx ] ] );
+            else
+                ++idx;
+        }
+
+        for( int i = 0; i < size; ++i ) {
+            if( nums[ i ] != i )
+                return nums[ i ];
+        }
+
+        return size;
+    }
+};
+} // namespace V4
