@@ -81,7 +81,9 @@ public:
 
 namespace V4 {
 /*
- * TODO: why time complexity is O(N) <O(N) + O(N-1)> ?
+ * TODO: why time complexity is O(N) <O(N) + O(N-1)>
+ * потому что каждый swap помещает значение в нужную позицию, и эта позиция больше не будет двигаться.
+ * нам нужно сделать N-1 перестановок и N итераций чтобы пройти весь массив от начала до конца
  *
  * Idea is using Cycle Sort
  *
