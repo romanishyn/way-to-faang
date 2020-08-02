@@ -14,6 +14,8 @@
 #include <set>
 #include <string_view>
 
+#include <limits>
+
 struct Functor {
     bool operator ()( int lhs, int rhs ) {
         return std::less<int>{}( lhs, rhs );
@@ -25,6 +27,9 @@ class name;
 
 int main ()
 {
-    std::cout << (-1 + 3 ) % 3 << std::endl;
+    auto num = std::numeric_limits< unsigned int >::min();
+    std::cout << num << std::endl;
+    std::cout << --num << std::endl;
+//    std::cout << (-1 + 3 ) % 3 << std::endl;
     return 0;
 }

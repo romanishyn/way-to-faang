@@ -24,6 +24,10 @@ dur = 8
 
 */
 
+#include <vector>
+
+using std::vector;
+
 using Interval = vector<int>;
 
 Interval getIntersection( const Interval& interval1, const Interval& interval2 ) {
@@ -49,8 +53,4 @@ vector<int> meetingPlanner( const vector<vector<int>>& slotsA, const vector<vect
     }
 
     return {};
-}
-
-int main() {
-    return 0;
 }

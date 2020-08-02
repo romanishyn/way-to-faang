@@ -2,6 +2,8 @@
  * https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
  * */
 
+#include <cstddef>
+
 // Definition for a Node.
 class Node {
 public:
