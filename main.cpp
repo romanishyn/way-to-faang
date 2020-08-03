@@ -25,11 +25,28 @@ struct Functor {
 template < typename  T >
 class name;
 
+int partition( std::vector< int >& values, int left, int right, int pivotIdx ) {
+    int pivotValue = values[ pivotIdx ];
+    std::swap( values[ right ], values[ pivotIdx ] );
+
+    int leftPartEndIdx = left;
+    for( int i = left; i < right; ++i ) {
+        if( values[ i ] < pivotValue ) {
+            std::swap( values[ i ], values[ leftPartEndIdx ] );
+            ++leftPartEndIdx;
+        }
+    }
+
+    std::swap( values[ leftPartEndIdx ], values[ right ] );
+
+    return leftPartEndIdx;
+}
 int main ()
 {
-    auto num = std::numeric_limits< unsigned int >::min();
-    std::cout << num << std::endl;
-    std::cout << --num << std::endl;
-//    std::cout << (-1 + 3 ) % 3 << std::endl;
+    std::vector< int > values{ 5, 3, 2, 7, 6 };
+    std::cout << "nen idx: " << partition( values, 0, values.size() - 1, 2 ) << std::endl;
+    for( int x : values )
+        std::cout << x << ", ";
+    std::cout << std::endl;
     return 0;
 }

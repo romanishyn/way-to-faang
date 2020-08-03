@@ -52,6 +52,83 @@ public:
 
 
 namespace V2 {
-/*
+/* LC: Time Limit Exceeded
+ *
+ * Idea is using QuickSelect
+ *
+ * QuickSelect: Time O(N), Space (1)
+ *
+ * N - current number of elements
+ * Time O(N), find median using QuickSelect
+ * Space (N), store all elements
  * */
+class MedianFinder {
+
+    using Elements = std::vector< int >;
+
+    Elements m_elements;
+
+public:
+    /** initialize your data structure here. */
+    MedianFinder() {
+    }
+
+    void addNum(int num) {
+        m_elements.push_back( num );
+    }
+
+    double findMedian() {
+        const int size = m_elements.size();
+        if( size & 1 ) {
+            nth_element( m_elements, size / 2 );
+            return m_elements[ size / 2 ];
+        }
+        else {
+            nth_element( m_elements, size / 2 - 1 );
+            double val1 = m_elements[ size / 2 - 1 ];
+            nth_element( m_elements, size / 2 );
+            double val2 = m_elements[ size / 2 ];
+
+            return ( val1 + val2 ) / 2;
+        }
+    }
+
+private:
+    void nth_element( Elements& elements, int pos ) {
+        if( elements.size() <= 1 )
+            return;
+
+        int left = 0;
+        int right = elements.size() - 1;
+        while( true ) {
+            int pivotIdx = right;
+            int finalChosenIdx = partition( elements, left, right, pivotIdx );
+
+            if( finalChosenIdx == pos )
+                break;
+
+            if( finalChosenIdx < pos )
+                left = finalChosenIdx + 1;
+            else
+                right = finalChosenIdx - 1;
+        }
+    }
+
+    int partition( Elements& elements, int left, int right, int pivotIdx ) {
+        int pivotValue = elements[ pivotIdx ];
+        std::swap( elements[ right ], elements[ pivotIdx ] );
+
+        int lesserItemsEndIdx = left;
+        for( int i = left; i < right; ++i ) {
+            if( elements[ i ] < pivotValue ) {
+                std::swap( elements[ i ], elements[ lesserItemsEndIdx ] );
+                ++lesserItemsEndIdx;
+            }
+        }
+
+        std::swap( elements[ right ], elements[ lesserItemsEndIdx ] );
+
+        return lesserItemsEndIdx;
+    }
+};
 } // namespace V2
