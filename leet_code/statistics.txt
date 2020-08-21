@@ -106,6 +106,7 @@ Done by myself but need attention:
 Need to be done:
 | 264, 227 с кем-то нужно, 57 в грокинге разберу,
 https://leetcode.com/problems/permutations/discuss/18239/a-general-approach-to-backtracking-questions-in-java-subsets-permutations-combination-sum-palindrome-partioning
+18
 
 Learn:
 lower_bound, upper_bound, equal_range
