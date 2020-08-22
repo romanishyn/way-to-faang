@@ -1,0 +1,209 @@
+Links:
+LC: https://leetcode.com/problems/first-missing-positive/
+GfG: https://www.geeksforgeeks.org/find-the-smallest-positive-number-missing-from-an-unsorted-array/
+Pramp: https://www.pramp.com/challenge/aK6V5GVZ9MSPqvG1vwQp
+
+/*----------------------------------------------------------------------------*/y 
+
+Find the Smallest Missing Positive Number
+
+Given an unsorted integer array, find the smallest missing positive integer.
+
+Example 1:
+Input: [1,2,0]
+Output: 3
+
+Example 2:
+Input: [3,4,-1,1]
+Output: 2
+
+Example 3:
+Input: [7,8,9,11,12]
+Output: 1
+
+Note:
+Positive numbers starts from 1
+Even if your programming language of choice doesn’t have that restriction (like Python),
+assume that the maximum value an integer can have is MAX_INT = 2^31-2.
+
+Follow up:
+Your algorithm should run in O(n) time and uses constant extra space.
+
+Edge cases:
+- nums[ 1, 2, 3 ], return 4
+- nums[ 0 ], return 1
+- duplicates, [ 3, 3 ], return 1
+- negative numbers
+- empty array
+- max possible value in array
+
+/*----------------------------------------------------------------------------*/
+
+Sulution 1. Naive approach.
+To solve this problem we can search all positive intergers, starting from 1 in the given array.
+Time O(N^2)
+Space O(1)
+
+int firstMissingPositive(vector<int>& nums) {
+	const int size = nums.size();
+	for( int target = 1; target <= size; ++target ) {
+		bool found = false;
+		for( int x : nums ) {
+			if( x == target ) {
+				found = true;
+				break;
+			}
+		}
+		if( !found )
+			return target;
+	}
+	return size + 1;
+}
+
+/*----------------------------------------------------------------------------*/
+
+Solution 2. Use Sort
+Time O(NlogN + N) -> O(NlogN)
+Space (1)
+
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        std::sort( nums.begin(), nums.end() );
+        int counter = 1;
+        for( int x : nums ) {
+            if( x == counter ) {
+                ++counter;
+            }
+        }
+        return counter;
+    }
+};
+
+/*----------------------------------------------------------------------------*/
+
+Solution 3. Use hash set
+Time (N)
+Space (N)
+
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        std::unordered_set< int > set( nums.begin(), nums.end() );
+        
+        const int size = nums.size();
+        for( int i = 1; i <= size; ++i ) {
+            if( !set.count( i ) )
+                return i;
+        }
+        
+        return size + 1;
+    }
+};
+
+/*----------------------------------------------------------------------------*/
+
+Solution 3. Cycle sort
+
+Sort: nums[ 0 ] = 1, nums[ 1 ] = 2, ...
+
+Time O(N)
+Space O(1)
+
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        const int size = nums.size();
+
+        int i = 0;
+        while( i < size ) {
+            if( nums[ i ] >= 1 && nums[ i ] <= size && nums[ i ] != nums[ nums[ i ] - 1 ] )
+                std::swap( nums[ i ], nums[ nums[ i ] - 1 ] );
+            else
+                ++i;
+        }
+
+        for( int i = 0; i < size; ++i ) {
+            if( nums[ i ] != i + 1 )
+                return i + 1;
+        }
+
+        return size + 1;
+    }
+};
+
+/*----------------------------------------------------------------------------*/
+
+Solution 4. Cycle sort
+
+Sort: nums[ 0 ] = 0, nums[ 1 ] = 1, ...
+
+Time O(N)
+Space O(1)
+
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        const int size = nums.size();
+
+        int i = 0;
+        while( i < size ) {
+            if( nums[ i ] >= 0 && nums[ i ] < size && nums[ i ] != nums[ nums[ i ] ] ) {
+                std::swap( nums[ i ], nums[ nums[ i ] ] );
+            }
+            else {
+                ++i;
+            }
+        }
+
+        i = 1;
+        while( i < size && nums[ i ] == i ) {
+            ++i;
+        }
+
+        if( size == 0 || i < size )
+            return i;
+        else
+            return nums[ 0 ] == i ? i + 1 : i ; // [1], or [1,2,3] -> i + 1
+    }
+};
+
+/*----------------------------------------------------------------------------*/
+
+Solution 5. Mark numbers
+
+Solution: https://leetcode.com/problems/first-missing-positive/discuss/17214/Java-simple-solution-with-documentation
+Explanation: https://leetcode.com/problems/first-missing-positive/discuss/319270/Explanation-of-crucial-observation-needed-to-deduce-algorithm
+
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        const int size = nums.size();
+
+        for( int i = 0; i < size; ++i ) {
+            if( nums[ i ] <= 0 || nums[ i ] > size )
+                nums[ i ] = size + 1;
+        }
+
+        for( int i = 0; i < size; ++i ) {
+            int num = std::abs( nums[ i ] );
+            if( num > size )
+                continue;
+
+            --num; // idx
+            if( nums[ num ] > 0 ) {
+                nums[ num ] = -1 * nums[ num ];
+            }
+        }
+
+        for( int i = 0; i < size; ++i ) {
+            if( nums[ i ] > 0 )
+                return i + 1;
+        }
+
+        return size + 1;
+    }
+};
+
+/*----------------------------------------------------------------------------*/
+
