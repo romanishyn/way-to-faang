@@ -3,7 +3,7 @@ LC: https://leetcode.com/problems/first-missing-positive/
 GfG: https://www.geeksforgeeks.org/find-the-smallest-positive-number-missing-from-an-unsorted-array/
 Pramp: https://www.pramp.com/challenge/aK6V5GVZ9MSPqvG1vwQp
 
-/*----------------------------------------------------------------------------*/y 
+/*----------------------------------------------------------------------------*/
 
 Find the Smallest Missing Positive Number
 
@@ -28,6 +28,10 @@ assume that the maximum value an integer can have is MAX_INT = 2^31-2.
 
 Follow up:
 Your algorithm should run in O(n) time and uses constant extra space.
+
+Hints:
+Remember, that you are allowed to modify input array
+What if the array is sorted?
 
 Edge cases:
 - nums[ 1, 2, 3 ], return 4

@@ -1,0 +1,153 @@
+Links:
+Educative: https://www.educative.io/courses/grokking-the-coding-interview/mEGORlpZYJE
+GfG: https://www.geeksforgeeks.org/find-element-bitonic-array/
+
+/*----------------------------------------------------------------------------*/
+
+Search Bitonic Array
+
+Given a Bitonic array of n distinct elements, find if a given 'kye' is present in it. 
+An array is considered bitonic if it is monotonically increasing and then monotonically decreasing.
+Monotonically increasing or decreasing means that for any index i in the array arr[i] != arr[i+1].
+
+Write a function to return the index of the ‘key’. If the ‘key’ is not present, return -1.
+
+*A Bitonic Sequence is a sequence of numbers which is first strictly increasing then after a point strictly decreasing.
+
+Example 1:
+Input: [1, 3, 8, 4, 2], key=4
+Output: 3
+
+Example 2:
+Input: [3, 8, 4, 1], key=5
+Output: -1
+
+Example 3:
+Input: [1, 3, 8, 12], key=12
+Output: 3
+
+/*----------------------------------------------------------------------------*/
+
+Solution 1. From Educative
+
+class SearchBitonicArray {
+ public:
+  static int search(const vector<int> &arr, int key) {
+    int maxIndex = findMax(arr);
+    int keyIndex = binarySearch(arr, key, 0, maxIndex);
+    if (keyIndex != -1) {
+      return keyIndex;
+    }
+    return binarySearch(arr, key, maxIndex + 1, arr.size() - 1);
+  }
+
+  // find index of the maximum value in a bitonic array
+  static int findMax(const vector<int> &arr) {
+    int start = 0, end = arr.size() - 1;
+    while (start < end) {
+      int mid = start + (end - start) / 2;
+      if (arr[mid] > arr[mid + 1]) {
+        end = mid;
+      } else {
+        start = mid + 1;
+      }
+    }
+
+    // at the end of the while loop, 'start == end'
+    return start;
+  }
+
+ private:
+  // order-agnostic binary search
+  static int binarySearch(const vector<int> &arr, int key, int start, int end) {
+    while (start <= end) {
+      int mid = start + (end - start) / 2;
+
+      if (key == arr[mid]) {
+        return mid;
+      }
+
+      if (arr[start] < arr[end]) {  // ascending order
+        if (key < arr[mid]) {
+          end = mid - 1;
+        } else {  // key > arr[mid]
+          start = mid + 1;
+        }
+      } else {  // descending order
+        if (key > arr[mid]) {
+          end = mid - 1;
+        } else {  // key < arr[mid]
+          start = mid + 1;
+        }
+      }
+    }
+    return -1;  // element is not found
+  }
+};
+
+/*----------------------------------------------------------------------------*/
+
+Solution 2. My solution
+
+class SearchBitonicArray {
+ public:
+  static int search(const vector<int> &arr, int key) {
+    int maxIdx = findMax( arr );
+    int ans = binarySearch( arr, 0 , maxIdx, key );
+    if( ans != -1 )
+      return ans;
+
+    return binarySearch( arr, maxIdx + 1, arr.size() - 1, key );
+  }
+
+private:
+  static int findMax( const vector<int>& arr ) {
+    int left = 0;
+    int right = arr.size() - 1;
+
+    int ans = -1;
+    while( left <= right ) {
+      int mid = left + ( right - left ) / 2;
+
+      if( mid == 0 || arr[ mid - 1 ] < arr[ mid ] ) {
+        ans = mid;
+        left = mid + 1;
+      }
+      else {
+        right = mid - 1;
+      }
+    }
+
+    return ans;
+  }
+
+  static int binarySearch( const vector< int >& arr, int left, int right, int key ) {
+    int ans = -1;
+    while( left <= right ) {
+      const int mid = left + ( right - left ) / 2;
+      if( arr[ mid ] == key )
+        return mid;
+
+      if( arr[ left ] < arr[ right ] ) { // increasing
+        if( arr[ mid ] < key ) {
+          left = mid + 1;
+        }
+        else {
+          right = mid - 1;
+        }
+      }
+      else { // decreasing
+        if( arr[ mid ] > key ) {
+          left = mid + 1;
+        }
+        else {
+          right = mid - 1;
+        }
+      }
+    }
+
+    return ans;
+  }
+};
+
+/*----------------------------------------------------------------------------*/
