@@ -47,13 +47,13 @@ public:
 
 private:
     int partition( vector< Point >& points, int left, int right, int pivotIdx ) {
-        const auto& pivotValue = points[ pivotIdx ];
-
         std::swap( points[ right ], points[ pivotIdx ] );
+
+        const auto& pivotValue = points[ right ];
 
         int lesserItemsTailIdx = left;
         for( int i = left; i < right; ++i ) {
-            if( compare( points[ i ], points[ pivotIdx ] ) < 0 ) {
+            if( compare( points[ i ], pivotValue ) < 0 ) {
                 std::swap( points[ i ], points[ lesserItemsTailIdx ] );
                 ++lesserItemsTailIdx;
             }
