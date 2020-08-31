@@ -35,7 +35,7 @@ public:
             minHeap.push( stick3 );
         }
 
-        return minHeap;
+        return cost;
     }
 };
 } // namespace
