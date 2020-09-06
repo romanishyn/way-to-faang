@@ -6,7 +6,8 @@ GfG: https://www.geeksforgeeks.org/find-element-bitonic-array/
 
 Find index of max element
 
-Given an array of integers which is initially increasing and then decreasing,
+Given an array of integers which is initially
+increasing and then decreasing,
 find the index of maximum value in the array.
 
 Example 1:
