@@ -140,7 +140,7 @@ Space O(N)
 */
 class MovingAverage {
     std::vector< int > m_window;
-    int m_counter = 0;
+    std::size_t m_counter = 0;
     int m_head{ 0 };
     double m_windowSum{ 0 };
     
@@ -158,6 +158,9 @@ public:
         int tail = ( m_head + 1 ) % m_window.size();
 
         m_windowSum += val - m_window[ tail ];
+
+        m_head = ( m_head + 1 ) % m_window.size();
+        m_window[ m_head ] = val;
 
         return m_windowSum / std::min( m_counter, m_window.size() );
     }
