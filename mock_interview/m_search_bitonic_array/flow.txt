@@ -2,6 +2,8 @@ Links:
 Educative: https://www.educative.io/courses/grokking-the-coding-interview/mEGORlpZYJE
 GfG: https://www.geeksforgeeks.org/find-element-bitonic-array/
 
+https://www.youtube.com/watch?v=GU7DpgHINWQ
+
 /*----------------------------------------------------------------------------*/
 
 Find index of max element
