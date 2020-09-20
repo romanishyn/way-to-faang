@@ -69,6 +69,55 @@ std::vector< int > sortBfs( const Graph& _graph ) {
     return result;
 }
 
+namespace {
+// Educative DFS
+class TopologicalSort {
+  using Graph = std::vector< std::vector< int > >;
+ public:
+  static vector<int> sort(int vertices, const vector<vector<int>>& edges) {
+    vector<int> sortedOrder( vertices );
+    std::vector< bool > visited( vertices );
+  
+    const Graph graph = buildGraph( vertices, edges );
+    int vertexPlace = vertices - 1;
+    for( int i = 0; i < graph.size(); ++i ) {
+      if( ! visited[ i ] ) {
+        vertexPlace = topologicalSort( graph, visited, sortedOrder, i, vertexPlace );
+      }
+    }
+
+    return sortedOrder;
+  }
+private:
+  static Graph buildGraph( int vertices, const vector<vector<int>>& edges ) {
+    Graph graph( vertices );
+    for( const auto& edge: edges ) {
+      graph[ edge[ 0 ] ].push_back( edge[ 1 ] );
+    }
+    return graph;
+  }
+
+  static int topologicalSort( 
+      const Graph& graph,
+      std::vector< bool >& visited,
+      std::vector< int >& sortedOrder,
+      int vertex,
+      int vertexPlace
+    ) {
+      visited[ vertex ] = true;
+
+      for( int adj : graph[ vertex ] ) {
+        if( ! visited[ adj ] ) {
+          vertexPlace = topologicalSort( graph, visited, sortedOrder, adj, vertexPlace );
+        }
+      }
+
+      sortedOrder[ vertexPlace ] = vertex;
+      return vertexPlace - 1;
+    }
+};
+} // namespace
+
 /*
 int main()
 {
