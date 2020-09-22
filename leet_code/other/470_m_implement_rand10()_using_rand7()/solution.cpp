@@ -28,3 +28,23 @@ public:
     }
 };
 } // namespace
+
+namespace {
+/*
+https://leetcode.com/problems/implement-rand10-using-rand7/discuss/150301/Three-line-Java-solution-the-idea-can-be-generalized-to-"Implement-RandM()-Using-RandN()"/246718
+*/
+class Solution {
+public:
+    int rand10() {
+        int num = 49;
+        do {
+            int row = rand7();
+            int col = rand7();
+
+            num = col + ( row - 1 ) * 7;
+        } while( num > 40 );
+
+        return num % 10 + 1;
+    }
+};
+} // namespace
