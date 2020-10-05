@@ -38,3 +38,37 @@ public:
     }
 };
 } // namespace V1
+
+namespace {
+/*
+*/
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int sum = std::accumulate( nums.begin(), nums.end(), 0 );
+
+        if( sum < k )
+            return 0;
+
+        std::vector< std::vector< int > > dp( nums.size(), std::vector< int >( sum + 1 ) );
+        for( int i = 0; i < dp.size(); ++i )
+            dp[ i ][ 0 ] = 1;
+
+        if( nums[ 0 ] <= sum )
+            dp[ 0 ][ nums[ 0 ] ] = 1;
+
+        for( int i = 1; i < dp.size(); ++i ) {
+            for( int j = 1; j < dp[ 0 ].size(); ++j ) {
+                dp[ i ][ j ] = dp[ i - 1 ][ j ];
+                if( nums[ i ] <= j)
+                    dp[ i ][ j ] += dp[ i - 1 ][ j - nums[ i ] ];
+            }
+        }
+
+        int counter = 0;
+        for( int j = dp[ 0 ].size(); j >= k; --j )
+
+        return dp.back().back();
+    }
+};
+} // namespace
