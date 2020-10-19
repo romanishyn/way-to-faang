@@ -3,6 +3,8 @@ LC: https://leetcode.com/problems/first-missing-positive/
 GfG: https://www.geeksforgeeks.org/find-the-smallest-positive-number-missing-from-an-unsorted-array/
 Pramp: https://www.pramp.com/challenge/aK6V5GVZ9MSPqvG1vwQp
 
+https://emre.me/coding-patterns/cyclic-sort/
+
 /*----------------------------------------------------------------------------*/
 
 Find the Smallest Missing Positive Number
@@ -20,6 +22,9 @@ Output: 2
 Example 3:
 Input: [7,8,9,11,12]
 Output: 1
+
+0 <= arr.size <= 10^4
+-10^9 <= arr[ i ] <= 10^9
 
 Note:
 Positive numbers starts from 1
