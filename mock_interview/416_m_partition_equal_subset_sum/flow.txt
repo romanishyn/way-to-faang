@@ -1,0 +1,49 @@
+Links:
+LC: https://leetcode.com/problems/partition-equal-subset-sum/
+
+/*----------------------------------------------------------------------------*/
+
+Partition Equal Subset Sum
+
+Given a non-empty array nums containing only positive integers,
+find if the array can be partitioned into two subsets
+such that the sum of elements in both subsets is equal.
+
+Example 1:
+Input: {1, 2, 3, 4}
+Output: True
+Explanation: The given set can be partitioned into two subsets with equal sum: {1, 4} & {2, 3}
+
+Example 2:
+Input: {2, 3, 4, 6}
+Output: False
+Explanation: The given set cannot be partitioned into two subsets with equal sum.
+
+Constraints:
+1 <= nums.length <= 200
+1 <= nums[i] <= 100
+
+/*----------------------------------------------------------------------------*/
+
+Solution 1. Top-Down
+N - size of nums;
+S - 
+Time O
+class Solution {
+public:
+    bool canPartition(vector<int>& nums) {
+        const int totalSum = std::accumulate( begin( nums ), end( nums ), 0 );
+
+        if( totalSum % 2 != 0 ) // sum of the array must be even
+            return false;
+
+        const int sumSetSum = totalSum / 2;
+        
+        
+    }
+
+private:
+    bool 
+};
+
+/*----------------------------------------------------------------------------*/
