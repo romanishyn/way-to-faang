@@ -4,6 +4,10 @@ GfG: https://www.geeksforgeeks.org/find-element-bitonic-array/
 
 https://www.youtube.com/watch?v=GU7DpgHINWQ
 
+https://leetcode.com/problems/koko-eating-bananas/
+
+https://leetcode.com/discuss/general-discussion/786126/python-powerful-ultimate-binary-search-template-solved-many-problems
+
 /*----------------------------------------------------------------------------*/
 
 Find index of max element
