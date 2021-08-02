@@ -1,5 +1,7 @@
 ﻿Solved:
 
+2020
+
 February
 23.02 - 1, 121
 
@@ -176,6 +178,13 @@ December
 03.12 - 701
 10.12 - 382
 
+2021
+
+Top 50 Facebook
+
+August
+02 - 384
+
 Done with help:
 {238},    {53},     139,    337,    198,    213,    91,     207,    417,    128,
 57,     1029,   435,    54,     424,    76,     297,    235,    208,    295,
@@ -196,6 +205,13 @@ Done by myself but need attention:
 358,    165,    373,    1291,   444,    273,    340,    314,    670,    350,
 1570,   38,     692,    380,    236,    901,    348,    25,     394,    31,
 735,    384,    106
+
+
+Top 50 Facebook
+Done with help:
+
+Done by myself but need attention:
+384,
 
 Need to be done:
 | 264, 227 с кем-то нужно, 57 в грокинге разберу,
