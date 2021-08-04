@@ -185,7 +185,7 @@ Top 50 Facebook
 August
 02 - 384
 03 - 56, 67, 124
-04 - 139, 140
+04 - 139, 140, 173
 
 Done with help:
 {238},    {53},     139,    337,    198,    213,    91,     207,    417,    128,
@@ -222,6 +222,7 @@ https://leetcode.com/problems/permutations/discuss/18239/a-general-approach-to-b
 
 29. Divide Two Integers
 65. Valid Number
+158. Read N Characters...
 
 Learn:
 lower_bound, upper_bound, equal_range

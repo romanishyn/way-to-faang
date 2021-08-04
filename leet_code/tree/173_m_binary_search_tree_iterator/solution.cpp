@@ -95,3 +95,34 @@ public:
     }
 };
 } // namespace
+
+namespace {
+class BSTIterator {
+    std::stack< TreeNode* > stack;
+
+    void pullLeftNodes( TreeNode* node ) {
+        while( node ) {
+            stack.push( node );
+            node = node->left;
+        }
+    }
+
+public:
+    BSTIterator(TreeNode* root) {
+        pullLeftNodes( root );
+    }
+
+    int next() {
+        auto node = stack.top();
+        stack.pop();
+
+        pullLeftNodes( node->right );
+
+        return node->val;
+    }
+
+    bool hasNext() {
+        return !stack.empty();
+    }
+};
+} // namespace
