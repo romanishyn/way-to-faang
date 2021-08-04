@@ -85,3 +85,45 @@ private:
     }
 };
 } // namespace
+
+
+namespace {
+/*
+S - s.size
+N - dict.size
+D - total size of each word in dict
+
+Time (S^N)*D - ?
+Space (S) - ?
+*/
+class Solution {
+public:
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+        std::unordered_map< int, std::vector< std::string > > memo;
+        return func( s, wordDict, 0, memo );
+    }
+    
+private:
+    std::vector< std::string > func( const std::string& s, const vector<string>& wordDict, int idx,
+                                   std::unordered_map< int, std::vector< std::string > >& memo ) {
+        if( memo.count( idx ) )
+            return memo[ idx ];
+
+        std::vector< std::string > result;
+
+        for( const auto& word : wordDict ) {
+            if( ( s.size() - idx ) >= word.size() && s.substr( idx, word.size() ) == word ) {
+                if( ( s.size() - idx ) == word.size() )
+                    result.push_back( word );
+                else {
+                    for( const auto& temp : func( s, wordDict, idx + word.size(), memo ) ) {
+                        result.push_back( word + " " + temp );
+                    }
+                }
+            }
+        }
+        
+        return memo[ idx ] = result;
+    }
+};
+} // namespace
