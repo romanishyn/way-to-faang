@@ -57,3 +57,37 @@ public:
         return dp.back();
     }
 };
+
+
+namespace {
+
+/*
+s =
+ 012345678
+"catsandog
+1  11  1
+0123456789
+wordDict = ["cats","dog","sand","and","cat"]
+
+dp=
+
+Time [length of s][size of dict][avg length of words in dict]
+Space [length of s]
+*/
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        std::vector< bool > dp( s.size() + 1 );
+        dp[ 0 ] = true;
+
+        for( int i = 0; i < s.size(); ++i ) {
+            for( const auto& word : wordDict ) {
+                if( dp[ i ] && ( s.size() - i ) >= word.size() && s.substr( i, word.size() ) == word )
+                    dp[ i + word.size() ] = true;
+            }
+        }
+
+        return dp.back();
+    }
+};
+} // namespace
