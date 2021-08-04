@@ -54,3 +54,69 @@ public:
     }
 };
 } // namespace V1
+
+namespace {
+/*
+N - number of nodes
+
+Time O(N)
+Space O(N) - need store view
+*/
+class Solution {
+public:
+    vector<int> rightSideView(TreeNode* root) {
+        std::vector< int > view;
+        rightSideView( root, view, 0 );
+        return view;
+    }
+
+private:
+    void rightSideView( TreeNode* node, std::vector< int >& view, int depth ) {
+        if( !node )
+            return;
+        
+        if( view.size() == depth ) {
+            view.push_back( node->val ); 
+        }
+        
+        rightSideView( node->right, view, depth + 1 );
+        rightSideView( node->left, view, depth + 1 );
+    }
+};
+} // namespace
+
+namespace {
+/*
+Time O(N)
+Space O(N)
+*/
+class Solution {
+public:
+    vector<int> rightSideView(TreeNode* root) {
+        std::vector< int > view;
+        if( ! root )
+            return view;
+        
+        std::queue< TreeNode* > queue;
+        queue.emplace( root );
+        
+        while( ! queue.empty() ) {
+            const int levelSize = queue.size();
+            for( int i = 0; i < levelSize; ++i ) {
+                auto node = queue.front();
+                queue.pop();
+                
+                if( i == 0 )
+                    view.push_back( node->val );
+                
+                if( node->right )
+                    queue.push( node->right );
+                if( node->left )
+                    queue.push( node->left );
+            }
+        }
+        
+        return view;
+    }
+};
+}
