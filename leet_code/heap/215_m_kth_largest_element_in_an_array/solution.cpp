@@ -86,3 +86,58 @@ public:
     }
 };
 } // namespace
+
+namespace {
+/*
+ 0 1 2 3 4 5
+[1,2,3,4,5,6], k = 2
+     l
+           r
+       p
+         L
+
+Time (N)
+Space O(1)
+*/
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        int left = 0;
+        int right = nums.size() - 1;
+
+        std::srand( std::time( nullptr ) );
+
+        while( left <= right ) {
+            int pivotIdx = left + ( std::rand() % (right - left + 1) );
+            pivotIdx = partition( left, right, pivotIdx, nums );
+            
+            if( pivotIdx == nums.size() - k )
+                return nums[ pivotIdx ];
+
+            if( pivotIdx > nums.size() - k )
+                right = pivotIdx - 1;
+            else
+                left = pivotIdx + 1;
+        }
+
+        return -1;
+    }
+
+private:
+    int partition(int left, int right, int pivotIdx, std::vector< int >& nums ) {
+        int pivotVal = nums[ pivotIdx ];
+        std::swap( nums[ pivotIdx ], nums[ right ] );
+
+        int lessThanPivot = left;
+
+        for( int i = left; i < right; ++i ) {
+            if( nums[ i ] < pivotVal )
+                std::swap( nums[ i ], nums[ lessThanPivot++ ] );
+        }
+
+        std::swap( nums[ lessThanPivot ], nums[ right ] );
+
+        return lessThanPivot;
+    }
+};
+}
