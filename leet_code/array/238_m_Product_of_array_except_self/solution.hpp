@@ -118,3 +118,30 @@ public:
        return output;
     }
 };
+
+namespace {
+/*
+Time O(N)
+Space O(1) - output array does not count as extra space for space complexity analisys.
+*/
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        const int size = nums.size();
+        
+        std::vector< int > result( size, 1 );
+        
+        for( int i = 1; i < size; ++i ) {
+            result[ i ] = result[ i - 1 ] * nums[ i - 1 ];
+        }
+        
+        int rightProd = 1;
+        for( int i = size - 1; i >= 0; --i ) {
+            result[ i ] *= rightProd;
+            rightProd *= nums[ i ];
+        }
+        
+        return result;
+    }
+};
+}
