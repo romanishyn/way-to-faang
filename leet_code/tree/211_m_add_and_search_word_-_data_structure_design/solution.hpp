@@ -148,3 +148,64 @@ private:
     }
 };
 } // namespace V2
+
+namespace {
+/*
+
+*/
+class WordDictionary {
+    struct Node {
+        using Ptr = std::unique_ptr< Node >;
+        
+        std::unordered_map< char, Ptr > children;
+        bool isEndOfWord{ false };
+    };
+    
+    Node::Ptr m_root;
+    
+    bool search( Node* node, const std::string& word, int idx ) {
+        if( word.size() == idx )
+            return node->isEndOfWord;
+        
+        const char ch = word[ idx ];
+        
+        if( ch == '.' ) {
+            for( auto& [_, child] : node->children ) {
+                if( search( child.get(), word, idx + 1 ) )
+                    return true;
+            }
+            
+            return false;
+        }
+        else {
+            auto it = node->children.find( ch );
+            return it != node->children.end() && search( it->second.get(), word, idx + 1 );
+        }
+    }
+    
+public:
+    /** Initialize your data structure here. */
+    WordDictionary()
+        : m_root{ std::make_unique< Node >() }
+    {    
+    }
+    
+    void addWord(string word) {
+        auto* node = m_root.get();
+        
+        for( char ch : word ) {
+            if( !node->children.count( ch ) ) {
+                node->children.try_emplace( ch, std::make_unique< Node >() );
+            }
+            
+            node = node->children[ ch ].get();
+        }
+        
+        node->isEndOfWord = true;
+    }
+    
+    bool search(string word) {
+        return search( m_root.get(), word, 0 );
+    }
+};
+} // namespace
