@@ -142,3 +142,129 @@ private:
     }
 };
 } // namespace
+
+
+namespace {
+/*
+N - size of s
+
+Time O((2^N)*N)
+Space O(N), do not count result
+*/
+class Solution {
+public:
+    vector<string> removeInvalidParentheses(string s) {
+        std::unordered_set< std::string > result;
+        std::string path;
+        const int targetLength = s.size() - countInvalidParentheses( s );
+        removeInvalidParentheses( s, 0, targetLength, result, path );
+        return { begin( result ), end( result ) };
+    }
+
+private:
+    int countInvalidParentheses( const std::string& str ) {
+        int left = 0;
+        int right = 0;
+        for( char ch : str ) {
+            if( ch == '(' )
+                ++left;
+            else if( ch == ')') {
+                if( left > 0 )
+                    --left;
+                else
+                    ++right;
+            }
+        }
+        return left + right;
+    }
+
+    void removeInvalidParentheses( const std::string& s, int idx, int targetLength,
+                                   std::unordered_set< std::string >& result, std::string& path ) {
+        if( path.size() == targetLength ) {
+            if( countInvalidParentheses( path ) == 0 )
+                result.insert( path );
+
+            return;
+        }
+        if( s.size() == idx )
+            return;
+
+        if( targetLength - path.size() > s.size() - ( idx ) )
+            return;
+
+        if( ! std::isalpha( s[ idx ] ) )
+            removeInvalidParentheses( s, idx + 1, targetLength, result, path );
+
+        path.push_back( s[ idx ] );
+        removeInvalidParentheses( s, idx + 1, targetLength, result, path );
+        path.pop_back();
+    }
+};
+} // namespace
+
+namespace {
+/*
+N - size of s
+
+Time O((2^N)*N)
+Space O(N), do not count result
+*/
+class Solution {
+public:
+    vector<string> removeInvalidParentheses(string s) {
+        if( s.size() < 1 )
+            return { s };
+
+        std::queue< std::string > todo;
+        std::unordered_set< std::string > seen;
+
+        todo.push( s );
+        seen.insert( s );
+
+        std::vector< std::string > result;
+
+        while( result.empty() && ! todo.empty() ) {
+            const int levelSize = todo.size();
+            for( int i = 0; i < levelSize; ++i ) {
+                auto str = todo.front();
+                todo.pop();
+                
+                if( isValidParentheses( str ) ) {
+                    result.push_back( str );
+                }
+
+                if( ! result.empty() )
+                    continue;
+
+                for( int idx = 0; idx < str.size(); ++idx ) {
+                    if( std::isalpha( str[ idx ] ) )
+                        continue;
+
+                    auto child = str.substr( 0, idx ) + str.substr( idx + 1 );
+                    if( seen.insert( child ).second )
+                        todo.push( std::move( child ) );
+                }
+            }
+        }
+        return result;
+    }
+
+private:
+    bool isValidParentheses( const std::string & str ) {
+        int left = 0;
+        int right = 0;
+        for( char ch : str ) {
+            if( ch == '(')
+                ++left;
+            else if( ch == ')' ) {
+                if( left  > 0 )
+                    --left;
+                else
+                    ++right;
+            }
+        }
+        
+        return left + right == 0;
+    }
+};
+} // namespace
