@@ -50,3 +50,36 @@ private:
     }
 };
 } // namespace V1
+
+namespace {
+/*
+N - max( num1.size, num2.size )
+
+Time O(N)
+Space O(1)
+*/
+class Solution {
+public:
+    string addStrings(string num1, string num2) {
+        int carry = 0;
+        std::string result;
+        int idx1 = num1.size() - 1;
+        int idx2 = num2.size() - 1;
+        
+        while( idx1 >= 0 || idx2 >= 0 || carry ) {
+            int val1 = idx1 >= 0 ? num1[ idx1-- ] - '0' : 0;
+            int val2 = idx2 >= 0 ? num2[ idx2-- ] - '0' : 0;
+            
+            int val = carry + val1 + val2;
+            carry = val / 10;
+            val %= 10;
+            
+            result.push_back( static_cast< char >( val + '0' ) );
+        }
+        
+        std::reverse( begin( result ), end( result ) );
+        
+        return result;
+    }
+};
+} // namespace
