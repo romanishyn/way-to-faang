@@ -190,6 +190,7 @@ August
 07 - 273
 08 -282
 09 - 301
+11 - 398
 
 Done with help:
 {238},    {53},     139,    337,    198,    213,    91,     207,    417,    128,
@@ -215,7 +216,7 @@ Done by myself but need attention:
 
 Top 50 Facebook
 Done with help:
-282
+282,    398
 
 Done by myself but need attention:
 384, 273
@@ -231,6 +232,7 @@ https://leetcode.com/problems/permutations/discuss/18239/a-general-approach-to-b
 249. Group Shifted Strings
 269. Alien Dictionary
 270. Closest Binary Search …
+314. Binary Tree Vertical Or...
 
 Learn:
 lower_bound, upper_bound, equal_range

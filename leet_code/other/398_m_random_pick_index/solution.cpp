@@ -35,3 +35,35 @@ public:
     }
 };
 } // namespace
+
+namespace {
+/*
+Reservoir Sampling
+
+Time O(N)
+Space (1)
+*/
+class Solution {
+    const std::vector< int > nums;
+public:
+    Solution(vector<int>& nums)
+    : nums{ nums }
+    {
+    }
+
+    int pick(int target) {
+        int idx = -1;
+        int count = 0;
+
+        for( int i = 0; i < nums.size(); ++i ) {
+            if( nums[ i ] == target ) {
+                ++count;
+                if( std::rand() % count < 1 ) // 1 is number of buckets
+                    idx = i;
+            }
+        }
+
+        return idx;
+    }
+};
+} // namespace
