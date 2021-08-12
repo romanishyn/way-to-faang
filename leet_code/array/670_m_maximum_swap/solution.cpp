@@ -79,3 +79,38 @@ public:
     }
 };
 } // namespace
+
+namespace {
+/*
+not optimal
+based on idea of monotonic stack, from right to left
+
+Time O(N)
+Space O(N) or O(10), since stack won't have more than 10 digits
+*/
+class Solution {
+public:
+    int maximumSwap(int num) {
+        auto str = std::to_string( num );
+
+        std::stack< std::pair< char, int > > stack;
+
+        for( int i = str.size() - 1; i >= 0; --i ) {
+            if( stack.empty() || str[ i ] > stack.top().first )
+                stack.emplace( str[ i ], i );
+        }
+
+        for( int i = 0; i < str.size(); ++i ) {
+            if( str[ i ] < stack.top().first ) {
+                std::swap( str[ i ], str[ stack.top().second ] );
+                break;
+            }
+
+            if( stack.top().second == i )
+                stack.pop();
+        }
+
+        return std::stoi( str );
+    }
+};
+} // namespace
