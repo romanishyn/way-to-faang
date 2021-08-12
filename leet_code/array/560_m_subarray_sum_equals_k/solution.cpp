@@ -72,3 +72,32 @@ public:
     }
 };
 } // namespace
+
+namespace {
+/*
+N - nums.length
+
+Time O(N)
+Space O(N)
+*/
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int sum = 0;
+        std::unordered_map< int, int > sufixCount;
+        sufixCount[ 0 ] = 1;
+
+        int result = 0;
+
+        for( int num : nums ) {
+            sum += num;
+            if( sufixCount.count( sum - k ) )
+                result += sufixCount[ sum - k ];
+
+            ++sufixCount[ sum ];
+        }
+
+        return result;
+    }
+};
+} // namespace
