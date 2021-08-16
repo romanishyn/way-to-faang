@@ -77,3 +77,39 @@ private:
     }
 };
 } // namespace
+
+namespace {
+/*
+Solution to delete at most K
+
+N - length of string
+K - number of characters to delete
+
+Time O(2^(N))
+Space O(N)
+*/
+class Solution {
+public:
+    bool validPalindrome(string s) {
+        return validPalindrome( s, 0, s.size() - 1, 1 );
+    }
+
+private:
+    bool validPalindrome( const std::string& str, int left, int right, int attempt ) {
+        if( attempt < 0 )
+            return false;
+
+        while( left < right ) {
+            if( str[ left ] != str[ right ] ) {
+                return validPalindrome( str, left + 1, right, attempt - 1 )
+                    || validPalindrome( str, left, right - 1, attempt - 1 );
+            }
+
+            ++left;
+            --right;
+        }
+
+        return true;
+    }
+};
+} // namespace
