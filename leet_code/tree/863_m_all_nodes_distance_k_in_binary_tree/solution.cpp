@@ -110,3 +110,72 @@ namespace V2 {
 /*
  * */
 } // namespace V2
+
+
+namespace {
+/*
+N - number of nodes
+
+Time (N)
+Space O(N)
+*/
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
+        std::unordered_map< TreeNode*, TreeNode* > nodeToParent;
+        fillParents( root, nullptr, nodeToParent );
+        
+        std::queue< TreeNode* > todo;
+        std::unordered_set< TreeNode* > seen;
+        todo.push( target );
+        seen.insert( target );
+        
+        while( k ) {
+            const int levelSize = todo.size();
+            for( int i = 0; i < levelSize; ++i ) {
+                auto node = todo.front();
+                todo.pop();
+                
+                if( nodeToParent[ node ] && seen.insert( nodeToParent[ node ] ).second )
+                    todo.push( nodeToParent[ node ] );
+                if( node->left && seen.insert( node->left ).second )
+                    todo.push( node->left );
+                if( node->right && seen.insert( node->right ).second )
+                    todo.push( node->right );
+            } 
+            
+            --k;
+        }
+        
+        std::vector< int > result;
+        while( ! todo.empty() ) {
+            auto node = todo.front();
+            todo.pop();
+            result.push_back( node->val );
+        }
+        
+        return result;
+    }
+    
+private:
+    void fillParents( TreeNode* node, TreeNode* parent, std::unordered_map< TreeNode*, TreeNode* >& nodeToParent)
+    {
+        if( ! node )
+            return;
+        
+        nodeToParent[ node ] = parent;
+        
+        fillParents( node->left, node, nodeToParent );
+        fillParents( node->right, node, nodeToParent );
+    }
+};
+} // namespace
