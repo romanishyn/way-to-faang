@@ -197,6 +197,8 @@ private:
 
 namespace {
 /*
+Doesn't compile
+
 Based on DFS
 */
 class Solution {
@@ -240,6 +242,164 @@ public:
             }
 
             result.push_back( account );
+        }
+
+        return result;
+    }
+};
+} // namespace
+
+namespace {
+/*
+UF
+*/
+class Solution {
+public:
+    vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
+        std::unordered_map< std::string, int > emailToIdx;
+        UF uf( accounts.size() );
+
+        for( int i = 0; i < accounts.size(); ++i ) {
+            for( int j = 1; j < accounts[ i ].size(); ++j ) {
+                auto it = emailToIdx.find( accounts[ i ][ j ] );
+                if( it == emailToIdx.end() ) {
+                    emailToIdx[ accounts[ i ][ j ] ] = i;
+                }
+                else {
+                    uf.unify( i, it->second );
+                }
+            }
+        }
+
+        std::vector< std::vector< std::string > > emails( accounts.size() );
+        for( const auto& [ email, idx ] : emailToIdx ) {
+            emails[ uf.find( idx ) ].push_back( email );
+        }
+        
+        std::vector< std::vector< std::string > > result;
+        for( int i = 0; i < emails.size(); ++i ) {
+            if( emails[ i ].empty() )
+                continue;
+            
+            std::vector< std::string > acc;
+            acc.push_back( accounts[ i ][ 0 ] );
+            std::sort( begin( emails[ i ] ), end( emails[ i ] ) );
+            std::move( begin( emails[ i ] ), end( emails[ i ] ), std::back_inserter( acc ) );
+            
+            result.push_back( std::move( acc ) );
+        }
+
+        return result;
+    }
+
+private:
+
+    class UF {
+        std::vector< int > m_id;
+        std::vector< int > m_size;
+        int m_components;
+
+    public:
+        UF( int size )
+            : m_components{ size }
+            , m_id( size )
+            , m_size( size )
+        {
+            for( int i = 0; i < size; ++i ) {
+                m_id[ i ] = i;
+                m_size[ i ] = 1;
+            }
+        }
+
+        void unify( int p, int q ) {
+            int rootP = find( p );
+            int rootQ = find( q );
+
+            if( rootP == rootQ )
+                return;
+
+            if( m_size[ rootP ] > m_size[ rootQ ] ) {
+                m_size[ rootP ] += m_size[ rootQ ];
+                m_id[ rootQ ] = rootP;
+            }
+            else {
+                m_size[ rootQ ] += m_size[ rootP ];
+                m_id[ rootP ] = rootQ;
+            }
+
+            --m_components;
+        }
+
+        int find( int p ) {
+            int root = m_id[ p ];
+            while( root != m_id[ root ] ) {
+                root = m_id[ root ];
+            }
+
+            while( p != root ) {
+                int next = m_id[ p ];
+                m_id[ p ] = root;
+                p = next;
+            }
+
+            return root;
+        }
+
+        int getComponents() const {
+            return m_components;
+        }
+    };
+};
+} // namespace
+
+namespace {
+/*
+DFS
+*/
+class Solution {
+public:
+    vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
+        std::unordered_map< std::string, std::unordered_set< std::string > > graph;
+        std::unordered_map< std::string, std::string > emailToName;
+
+        for( const auto& acc : accounts ) {
+            for( int i = 1; i < acc.size(); ++i ) {
+                graph.try_emplace( acc[ i ], std::unordered_set< std::string >{} );
+                emailToName.try_emplace( acc[ i ], acc[ 0 ] );
+
+                if( i != 1 ) {
+                    graph[ acc[ i ] ].insert( acc[ i - 1 ] );
+                    graph[ acc[ i - 1 ] ].insert( acc[ i ] );
+                }
+            }
+        }
+
+        std::vector< std::vector< std::string > > result;
+
+        std::stack< std::string > todo;
+        std::unordered_set< std::string > seen;
+        for( const auto& [email, name] : emailToName ) {
+            if( ! seen.insert( email ).second )
+                continue;
+
+            std::vector< std::string > acc;
+            acc.push_back( name );
+
+            todo.emplace( email );
+            while( ! todo.empty() ) {
+                auto node = todo.top();
+                todo.pop();
+
+                acc.push_back( node );
+
+                for( const auto& adj : graph[ node ] ) {
+                    if( seen.insert( adj ).second )
+                        todo.emplace( adj );
+                }
+            }
+
+            std::sort( std::next( begin( acc ) ), end( acc ) );
+            result.push_back( std::move( acc ) );
         }
 
         return result;

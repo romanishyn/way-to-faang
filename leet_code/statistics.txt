@@ -193,6 +193,7 @@ August
 11 - 398, 415
 12 - 528, 543, 560, 636, 670
 16 - 680
+24 - 721
 
 Done with help:
 {238},    {53},     139,    337,    198,    213,    91,     207,    417,    128,
@@ -218,7 +219,7 @@ Done by myself but need attention:
 
 Top 50 Facebook
 Done with help:
-282,    398,    636,    670
+282,    398,    636,    670,    721
 
 Done by myself but need attention:
 384, 273
@@ -237,6 +238,7 @@ https://leetcode.com/problems/permutations/discuss/18239/a-general-approach-to-b
 314. Binary Tree Vertical Or...
 426. Convert Binary Search
 536. Construct Binary Tree …
+708. Insert into a Sorted Ci…
 
 Learn:
 lower_bound, upper_bound, equal_range
