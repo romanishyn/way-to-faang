@@ -79,3 +79,50 @@ private:
     }
 };
 } // namespace V1
+
+namespace {
+/*
+N - words.size
+M - max( words[ i ].size )
+
+compare() - return value: negative - str1 less than str2, zero - equals, positive - str1 greater than str2
+
+Time O(N*M)
+Space O(1)
+*/
+class Solution {
+    using Alphabet = std::map< char, int >;
+
+public:
+    bool isAlienSorted(vector<string>& words, string order) {
+        const auto alphabet = createAlphabet( order );
+
+        for( int i = 1; i < words.size(); ++i ) {
+            if( compare( words[ i - 1 ], words[ i ], alphabet ) > 0 )
+                return false;
+        }
+
+        return true;
+    }
+
+private:
+    Alphabet createAlphabet( const std::string& order ) {
+        Alphabet result;
+
+        for( int i = 0; i < order.size(); ++i ) {
+            result[ order[ i ] ] = i;
+        }
+
+        return result;
+    }
+
+    int compare( const std::string& lhs, const std::string& rhs, const Alphabet& alphabet ) {
+        for( int i = 0; i < lhs.size() && i < rhs.size(); ++i ) {
+            if( lhs[ i ] != rhs[ i ] )
+                return alphabet.at( lhs[ i ] ) - alphabet.at( rhs[ i ] );
+        }
+
+        return static_cast< int >( lhs.size() ) - static_cast< int >( rhs.size() );
+    }
+};
+} // namespace
