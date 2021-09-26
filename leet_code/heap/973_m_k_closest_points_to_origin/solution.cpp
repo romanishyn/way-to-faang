@@ -112,3 +112,103 @@ public:
     }
 };
 } // namespace V2
+
+namespace {
+/*
+N - points.size
+K - k
+
+Time O(NlogK)
+Space O(K)
+*/
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+        auto comparator = [](const auto& lhs, const auto& rhs) {
+            const int dist1 = lhs[ 0 ] * lhs[ 0 ] + lhs[ 1 ] * lhs[ 1 ];
+            const int dist2 = rhs[ 0 ] * rhs[ 0 ] + rhs[ 1 ] * rhs[ 1 ];
+            
+            return dist1 < dist2;
+        };
+        
+        std::priority_queue< std::vector< int >, std::vector< std::vector< int > >, decltype( comparator ) > maxHeap( comparator );
+        
+        for( int i = 0; i < k; ++i )
+            maxHeap.push( points[ i ] );
+        
+        for( int i = k; i < points.size(); ++i ) {
+            maxHeap.push( points[ i ] );
+            maxHeap.pop();
+        }
+            
+        std::vector< std::vector< int > > result;
+        while( ! maxHeap.empty() ) {
+            result.push_back( maxHeap.top() );
+            maxHeap.pop();
+        }
+        
+        return result;
+    }
+};
+} // namespace
+
+
+namespace {
+/*
+N - points.size
+K - k
+
+Time O(N)
+Space O(1)
+*/
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+        const int size = points.size();
+        
+        int left = 0;
+        int right = size - 1;
+        
+        while( left <= right ) {
+            int pivotIdx = right;
+            pivotIdx = partition( points, left, right, pivotIdx );
+            
+            if( pivotIdx == k - 1 )
+                break;
+            else if( pivotIdx > k - 1 )
+                right = pivotIdx - 1;
+            else
+                left = pivotIdx + 1;
+        }
+        
+        
+        return { points.begin(), std::next( points.begin(), k ) };
+    }
+    
+private:
+    int partition( std::vector< std::vector< int > > & points, int left, int right, int pivotIdx ) {
+        std::swap( points[ pivotIdx ], points[ right ] );
+        const auto & pivotValue = points[ right ];
+        
+        int lessThanPivotValIdx = left;
+        
+        auto comparator = [] ( const auto& lhs, const auto& rhs ) {
+            const int dist1 = lhs[ 0 ] * lhs[ 0 ] + lhs[ 1 ] * lhs[ 1 ];
+            const int dist2 = rhs[ 0 ] * rhs[ 0 ] + rhs[ 1 ] * rhs[ 1 ];
+            
+            return dist1 < dist2;
+        };
+        
+        for( int i = left; i < right; ++i ) {
+            if( comparator( points[ i ], pivotValue ) ) {
+                std::swap( points[ lessThanPivotValIdx ], points[ i ] );
+                ++lessThanPivotValIdx;
+            }
+        }
+        
+        std::swap( points[ right ], points[ lessThanPivotValIdx ] );
+        
+        return lessThanPivotValIdx;
+    }    
+};
+} // namespace
