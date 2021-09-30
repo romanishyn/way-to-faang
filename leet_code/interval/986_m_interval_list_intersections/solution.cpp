@@ -57,3 +57,37 @@ private:
     }
 };
 } // namespace V1
+
+namespace {
+/*
+N - firstList.size
+M - secondList.size
+
+Time O(N+M)
+Space O(N+M)
+*/
+class Solution {
+public:
+    vector<vector<int>> intervalIntersection(vector<vector<int>>& firstList, vector<vector<int>>& secondList) {
+        std::vector< std::vector< int > > result;
+
+        int a = 0;
+        int b = 0;
+
+        while( a < firstList.size() && b < secondList.size() ) {
+            int begin = std::max( firstList[ a ][ 0 ], secondList[ b ][ 0 ] );
+            int end = std::min( firstList[ a ][ 1 ], secondList[ b ][ 1 ] );
+
+            if( end - begin >= 0 )
+                result.push_back( { begin, end } );
+
+            if( firstList[ a ][ 1 ] < secondList[ b ][ 1 ] )
+                ++a;
+            else
+                ++b;
+        }
+
+        return result;
+    }
+};
+} // namespace
