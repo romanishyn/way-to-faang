@@ -69,4 +69,56 @@ public:
 };
 } // namespace V1 
 
+namespace {
+/*
+ * N - number of nodes
+ *
+ * Time O(NlogN), need sort all nodes
+ * Space (N)
+*/
+class Solution {
+    using TreeModel = std::map< int, std::map< int, std::multiset< int > > >;
+    
+    TreeModel buildTreeModel( const TreeNode* root ) {
+        TreeModel model;
+             
+        std::stack< std::tuple< const TreeNode*, int/*row*/, int/*col*/ > > stack;
+        stack.emplace( root, 0, 0 );
+        
+        while( ! stack.empty() ) {
+            auto [node, row, col] = stack.top();
+            stack.pop();
+            
+            model[ col ][ row ].insert( node->val );
+            
+            if( node->left )
+                stack.emplace( node->left, row + 1, col - 1 );
+            if( node->right )
+                stack.emplace( node->right, row + 1, col + 1 );
+        }
+        
+        return model;
+    }
+    
+public:
+    vector<vector<int>> verticalTraversal(TreeNode* root) {
+        auto treeModel = buildTreeModel( root );
+        
+        std::vector< std::vector< int > > result;
+        
+        for( const auto& [_, col] : treeModel ) {
+            std::vector< int > temp;
+            
+            for( const auto& [_2, row] : col ) {
+                std::copy( row.begin(), row.end(), std::back_inserter( temp ) );
+            }
+            
+            result.push_back( std::move( temp ) );
+        }
+        
+        return result;
+    }
+};
+} // namespace
+
 
