@@ -61,3 +61,43 @@ private:
     }
 };
 } // namespace V1
+
+namespace {
+/*
+N - s.size
+
+Time O(N)
+Space O(N)
+*/
+class Solution {
+public:
+    string minRemoveToMakeValid(string s) {
+        std::stack< int > left;
+        std::unordered_set< int > remove;
+        
+        for( int i = 0; i < s.size(); ++i ) {
+            if( s[ i ] == '(' )
+                left.push( i );
+            else if( s[ i ] == ')' ) {
+                if( left.empty() )
+                    remove.insert( i );
+                else
+                    left.pop();
+            }
+        }
+        
+        while( ! left.empty() ) {
+            remove.insert( left.top() );
+            left.pop();
+        }
+        
+        std::string result;
+        for( int i = 0; i < s.size(); ++i ) {
+            if( ! remove.count( i ) )
+                result += s[ i ];
+        }
+        
+        return result;
+    }
+};
+} // namespace
