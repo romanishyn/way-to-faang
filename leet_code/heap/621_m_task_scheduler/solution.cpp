@@ -101,3 +101,55 @@ public:
     }
 };
 } // namespace
+
+namespace {
+/*
+N = tasts.size
+
+Time O(N)
+Space O(1)
+*/
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        std::unordered_map< char, int > jobToCount;
+        for( char job : tasks )
+            ++jobToCount[ job ];
+        
+        using Task = std::pair< char, int >;
+        auto comparator = []( const Task& lhs, const Task& rhs ) {
+            return lhs.second < rhs.second;
+        };
+               
+        std::priority_queue< Task, std::vector< Task >, decltype( comparator ) > maxHeap( comparator );
+        
+        for( const Task& task : jobToCount )
+            maxHeap.push( task );
+        
+        int units = 0;
+        
+        std::queue< std::pair< Task, int > > waiting;
+        
+        while( ! maxHeap.empty() || ! waiting.empty() ) {
+            
+            if( ! maxHeap.empty() ) {
+                auto t = maxHeap.top();
+                maxHeap.pop();
+
+                if( --t.second )
+                    waiting.emplace( t, units + n );
+
+            }
+            
+            ++units;
+            
+            while( ! waiting.empty() && waiting.front().second < units ) {
+                maxHeap.push( waiting.front().first );
+                waiting.pop();
+            }
+        }
+        
+        return units;
+    }
+};
+} // namespace
