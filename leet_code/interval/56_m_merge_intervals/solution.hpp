@@ -100,3 +100,29 @@ public:
     }
 };
 } // namespace
+
+namespace {
+/*
+N - intervals.size
+
+Time O(NlogN)
+Space O(logN) or O(N)
+*/
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        std::sort( begin( intervals ), end( intervals ) );
+
+        std::vector< std::vector< int > > result;
+
+        for( const auto& interval : intervals ) {
+            if( result.empty() || result.back()[ 1 ] < interval[ 0 ] )
+                result.push_back( interval );
+            else
+                result.back()[ 1 ] = std::max( result.back()[ 1 ], interval[ 1 ] );
+        }
+
+        return result;
+    }
+};
+}
