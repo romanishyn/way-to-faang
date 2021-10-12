@@ -99,3 +99,49 @@ public:
     }
 };
 } // namespace V2
+
+namespace {
+/*
+N - nums.size
+
+Time O(N^2)
+Space O(1)
+*/
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        std::sort( begin( nums ), end( nums ) );
+        
+        std::vector< std::vector< int > > result;
+        
+        const int size = nums.size();
+        
+        for( int i = 0; i < size - 2; ++i ) {
+            if( i != 0 && nums[ i ] == nums[ i - 1 ] )
+                continue;
+            
+            int j = i + 1;
+            int k = size - 1;
+            
+            const int target = -nums[ i ];
+            
+            while( j < k ) {
+                const int curr = nums[ j ] + nums[ k ];
+                
+                if( target == curr ) {
+                    result.push_back( { nums[ i ], nums[ j ], nums[ k ] } );
+                    
+                    while( j < k && nums[ j ] == nums[ ++j ] );
+                    while( j > k && nums[ k ] == nums[ --k ] );
+                }
+                else if( target < curr )
+                    --k;
+                else
+                    ++j;
+            }
+        }
+        
+        return result;
+    }
+};
+} // namespace
