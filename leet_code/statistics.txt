@@ -205,7 +205,7 @@ October
 02 - 621
 07 - 56
 12 - 15
-13 - 10
+13 - 10, 44
 
 Done with help:
 {238},    {53},     139,    337,    198,    213,    91,     207,    417,    128,
@@ -231,7 +231,7 @@ Done by myself but need attention:
 
 Top 50 Facebook + Facebook Tag
 Done with help:
-282,    398,    636,    670,    721,    827,    10
+282,    398,    636,    670,    721,    827,    10,     44
 
 Done by myself but need attention:
 384, 273, 621
