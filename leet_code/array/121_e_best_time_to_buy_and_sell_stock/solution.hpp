@@ -52,3 +52,24 @@ public:
         return profit;
     }
 };
+
+namespace {
+/*
+N - prices.size
+
+Time O(N)
+Space O(1)
+*/
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int profit = 0;
+        int minPrice = prices[ 0 ];
+        for( int i = 1; i < prices.size(); ++i ) {
+            minPrice = std::min( minPrice, prices[ i ] );
+            profit = std::max( profit, prices[ i ] - minPrice ); 
+        }
+        return profit;
+    }
+};
+} // namespace
