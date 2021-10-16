@@ -62,3 +62,29 @@ public:
     }
 };
 } // namespace
+
+namespace {
+/*
+N - nums.size
+
+Time O(N)
+Space O(1)
+*/
+class Solution {
+public:
+    int findLengthOfLCIS(vector<int>& nums) {
+        int maxLength = 0;
+        int currLength = 0;
+        for( int i = 0; i < nums.size(); ++i ) {
+            if( i == 0 || nums[ i - 1 ] < nums[ i ] ) {
+                ++currLength;
+                maxLength = std::max( maxLength, currLength );
+            }
+            else
+                currLength = 1;
+        }
+        
+        return maxLength;
+    }
+};
+} // namespace
