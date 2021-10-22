@@ -122,3 +122,42 @@ public:
     }
 };
 } // namespace
+
+namespace {
+/*
+N - number of nodes
+H - hight of tree
+
+Time O(N*H)
+Space O(N*H)
+*/
+class Solution {
+public:
+    vector<string> binaryTreePaths(TreeNode* root) {
+        std::queue< std::pair< TreeNode*, std::string > > queue;
+        queue.emplace( root, "" );
+        
+        std::vector< std::string > result;
+        
+        while( ! queue.empty() ) {
+            auto [node, path] = queue.front();
+            queue.pop();
+            
+            path += std::to_string( node->val );
+            
+            if( ! node->left && ! node->right )
+                result.push_back( std::move( path ) );
+            else {
+                path += "->";
+                
+                if( node->left )
+                    queue.emplace( node->left, path );
+                if( node->right )
+                    queue.emplace( node->right, path );
+            }
+        }
+        
+        return result;
+    }
+};
+} // namespace
