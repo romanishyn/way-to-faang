@@ -152,3 +152,67 @@ private:
     }
 };
 } // namespace
+
+namespace {
+/*
+Solution above is better than this one
+*/
+class Solution {
+    std::vector< bool > rows;
+    std::vector< bool > cols;
+    std::vector< bool > diagonal;
+    std::vector< bool > anti_diagonal;
+    int size;
+    
+public:
+    vector<vector<string>> solveNQueens(int n) {
+        rows = std::vector< bool >( n );    
+        cols = std::vector< bool >( n );
+        diagonal = std::vector< bool >( n + n - 1 );
+        anti_diagonal = std::vector< bool >( n + n - 1 );
+        size = n;
+        
+        vector<vector<string>> result;
+        vector<string> board( n, std::string( n, '.' ) );
+        solveNQueens( result, board, 0 );
+        
+        return result;
+    }
+    
+private:
+    void solveNQueens( vector<vector<string>>& result, vector<string>& board, int row ) {
+        if( row == size ) {
+            result.push_back( board );
+        }
+        else {
+            for( int j = 0; j < size; ++j ) {
+                if( canTakePlace( row, j ) ) {
+                    takePlace( row, j );
+                    board[ row ][ j ] = 'Q';
+                    solveNQueens( result, board, row + 1 );
+                    freePlace( row, j );
+                    board[ row ][ j ] = '.';
+                }
+            }
+        }
+    }
+    
+    bool canTakePlace( int i, int j ) {
+        return !( rows[ i ] || cols[ j ] || diagonal[ i + j ] || anti_diagonal[ size - 1 - i + j ] );
+    }
+    
+    void takePlace( int i, int j ) {
+        rows[ i ] = true;
+        cols[ j ] = true;
+        diagonal[ i + j ] = true;
+        anti_diagonal[ size - 1 - i + j ] = true;
+    }
+    
+    void freePlace( int i , int j ) {
+        rows[ i ] = false;
+        cols[ j ] = false;
+        diagonal[ i + j ] = false;
+        anti_diagonal[ size - 1 - i + j ] = false;
+    }
+ };
+}
