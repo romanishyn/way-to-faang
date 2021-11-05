@@ -198,3 +198,44 @@ public:
     }
 };
 } // namespace
+
+namespace {
+/*
+N - height.size
+
+Time O(N)
+Space O(1)
+*/
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int globalMax = -1;
+        int globalMaxIdx = -1;
+        
+        for( int i = 0; i < height.size(); ++i ) {
+            if( globalMax < height[ i ] ) {
+                globalMax = height[ i ];
+                globalMaxIdx = i;
+            }
+        }
+        
+        
+        int result = 0;
+        int currMax = 0;
+        for( int i = 0; i < globalMaxIdx; ++i ) {
+            currMax = std::max( currMax, height[ i ] );
+            if( height[ i ] < currMax )
+                result += currMax - height[ i ];
+        }
+        
+        currMax = 0;
+        for( int i = height.size() - 1; i > globalMaxIdx; --i ) {
+            currMax = std::max( currMax, height[ i ] );
+            if( height[ i ] < currMax )
+                result += currMax - height[ i ];
+        }
+        
+        return result;
+    }
+};
+} // namespace
