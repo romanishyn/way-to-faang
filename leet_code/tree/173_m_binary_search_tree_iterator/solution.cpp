@@ -126,3 +126,43 @@ public:
     }
 };
 } // namespace
+
+namespace {
+/*
+H - hight of tree
+N - number of nodes
+
+Time O(N)
+On average next() and hasNext() are Time O(1)
+Space O(H)
+*/
+class BSTIterator {
+public:
+    BSTIterator(TreeNode* root) {
+        fillStack(root);
+    }
+    
+    int next() {
+        auto node = stack.top();
+        stack.pop();
+        
+        fillStack( node->right );
+        
+        return node->val;
+    }
+    
+    bool hasNext() {
+        return ! stack.empty();
+    }
+    
+private:
+    void fillStack(const TreeNode* node ) {
+        while( node ) {
+            stack.push( node );
+            node = node->left;
+        }
+    }
+private:
+    std::stack< const TreeNode* > stack;
+};
+} // namespace
