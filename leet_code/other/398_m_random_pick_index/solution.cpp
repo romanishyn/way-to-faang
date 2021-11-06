@@ -67,3 +67,37 @@ public:
     }
 };
 } // namespace
+
+namespace {
+/*
+Reservoir sampling
+
+N - nums.size
+
+Time O(N)
+Space O(1) or O(N)
+*/
+class Solution {
+    vector<int> nums;
+    
+public:
+    Solution(vector<int>& nums)
+        : nums{ nums }
+    {
+    }
+    
+    int pick(int target) {
+        int idx = 0;
+        int count = 0;
+        for( int i = 0; i < nums.size(); ++i ) {
+            if( target == nums[ i ] ) {
+                ++count;
+                if( std::rand() % count == 0 )
+                    idx = i;
+            }
+        }
+        
+        return idx;
+    }
+};
+} // namespace
