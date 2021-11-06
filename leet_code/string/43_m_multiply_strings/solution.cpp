@@ -49,4 +49,44 @@ public:
         return number.empty() ? "0" : number;
     }
 };
-} //
+} // namespace
+
+namespace {
+/*
+M - num1.size
+N - num2.size
+
+Time O(M*N)
+Space O(1)
+*/
+class Solution {
+public:
+    string multiply(string num1, string num2) {
+        if( num1 == "0" || num2 == "0" )
+            return "0";
+
+        reverse( begin( num1 ), end( num1 ) );
+        reverse( begin( num2 ), end( num2 ) );
+
+        string result( num1.size() + num2.size(), '0' );
+
+        for( int i = 0; i < num1.size(); ++i ) {
+            const int digit1 = num1[ i ] - '0';
+            for( int j = 0; j < num2.size(); ++j ) {
+                const int digit2 = num2[ j ] - '0';
+
+                const int num = digit1 * digit2 + result[ i + j ] - '0';
+                result[ i + j ] = num % 10 + '0';
+                result[ i + j + 1 ] += num / 10;
+            }
+        }
+
+        if( result.back() == '0' )
+            result.pop_back();
+
+        reverse( begin( result ), end( result ) );
+
+        return result;
+    }
+};
+} // namespace
