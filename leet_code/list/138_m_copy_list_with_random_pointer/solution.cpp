@@ -163,3 +163,81 @@ public:
     }
 };
 } // namespace
+
+namespace {
+/*
+N - nubmer of nodes
+
+Time O(N)
+Space O(N)
+*/
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        std::unordered_map< Node*, Node* > origToCopy;
+        origToCopy[ nullptr ] = nullptr;
+        
+        auto curr = head;
+        while( curr ) {
+            auto node = new Node( curr->val );
+            origToCopy[ curr ] = node;
+            curr = curr->next;
+        }
+        
+        curr = head;
+        while( curr ) {
+            auto node = origToCopy[ curr ];
+            node->next = origToCopy[ curr->next ];
+            node->random = origToCopy[ curr->random ];
+            curr = curr->next;
+        }
+        
+        return origToCopy[ head ];
+    }
+};
+} // namespace
+
+namespace {
+/*
+N - number of nodes
+
+Time O(N)
+Space O(1)
+*/
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        if( ! head )
+            return nullptr;
+        
+        auto curr = head;
+        while( curr ) {
+            auto node = new Node( curr->val );
+            node->next = curr->next;
+            curr->next = node;
+            curr = curr->next->next;
+        }
+        
+        curr = head;
+        while( curr ) {
+            if( curr->random )
+                curr->next->random = curr->random->next;
+            
+            curr = curr->next->next;
+        }
+        
+        auto copyHead = head->next;
+        auto copyCurr = copyHead;
+        curr = head;
+        while( curr ) {
+            curr->next = curr->next->next;
+            if( curr->next )
+                copyCurr->next = curr->next->next;
+            curr = curr->next;
+            copyCurr = copyCurr->next;
+        }
+        
+        return copyHead;
+    }
+};
+} // namespace

@@ -74,3 +74,38 @@ public:
         return dp.back();
     }
 };
+
+namespace {
+/*
+N - s.size
+
+Time O(N)
+Space O(N)
+*/
+class Solution {
+public:
+    int numDecodings(string s) {
+        std::vector< int > memo( s.size(), -1 );
+        return numDecodings( s, 0, memo );
+    }
+    
+private:
+    int numDecodings( const std::string& str, int idx, std::vector< int >& memo ) {
+        if( str.size() == idx )
+            return 1;
+        if( memo[ idx ] != -1 )
+            return memo[ idx ];
+        
+        int result = 0;
+        
+        if( str[ idx ] > '0' ) {
+            result += numDecodings( str, idx + 1, memo );
+            
+            if( idx + 1 < str.size() && std::stoi( str.substr( idx, 2 ) ) <= 26 )
+                result += numDecodings( str, idx + 2, memo );
+        }
+        
+        return memo[ idx ] = result;                    
+    }
+};
+} // namespace
