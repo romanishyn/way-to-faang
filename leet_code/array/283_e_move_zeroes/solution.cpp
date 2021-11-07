@@ -41,3 +41,31 @@ public:
     }
 };
 } // namespace V1
+
+namespace {
+/*
+N - nums.size
+
+Time O(N)
+Space O(1)
+*/
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int write = findFirst( nums, 0 );
+        for( int i = write + 1; i < nums.size(); ++i ) {
+            if( nums[ i ] != 0 ) {
+                std::swap( nums[ write++ ], nums[ i ] );
+            }
+        }
+    }
+private:
+    int findFirst( const std::vector< int >& nums, int key ) {
+        for( int i = 0; i < nums.size(); ++i ) {
+            if( nums[ i ] == key )
+                return i;
+        }
+        return nums.size();
+    }
+};
+} // namespace
