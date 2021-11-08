@@ -214,6 +214,7 @@ November
 05 - 42, 173, 151
 06 - 43, 38, 398
 07 - 91, 138, 283
+08 - 636
 
 Done with help:
 {238},    {53},     139,    337,    198,    213,    91,     207,    417,    128,
@@ -239,7 +240,7 @@ Done by myself but need attention:
 
 Top 50 Facebook + Facebook Tag
 Done with help:
-282,   +398,    636,    670,    721,    827,    10,     44,     51,     151,
+282,   +398,    +636,    670,    721,    827,    10,     44,     51,     151,
 43,     38,     91
 
 Done by myself but need attention:

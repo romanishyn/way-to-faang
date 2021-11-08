@@ -119,3 +119,63 @@ public:
     }
 };
 } // namespace
+
+namespace {
+/*
+N - logs.size
+
+Time O(N)
+Space O(N)
+*/
+class Solution {
+public:
+	vector<int> exclusiveTime(int n, vector<string>& logs) {
+		std::vector< int > result(n);
+
+		std::stack< Entry > stack;
+
+		for (const auto& log : logs) {
+			auto entry = parseLog(log);
+
+			if (entry.state == "start") {
+				stack.push(entry);
+			}
+			else {
+				auto startEntry = stack.top();
+				stack.pop();
+				int elapsedTime = entry.time - startEntry.time + 1;;
+				result[startEntry.id] += elapsedTime;
+
+				if (!stack.empty()) {
+					result[stack.top().id] -= elapsedTime;
+				}
+			}
+		}
+
+		return result;
+	}
+
+private:
+	struct Entry {
+		int id;
+		std::string state;
+		int time;
+	};
+
+	Entry parseLog(const std::string& log) {
+		std::stringstream ss{ log };
+		std::string token;
+
+		std::getline(ss, token, ':');
+		int id = std::stoi(token);
+
+		std::getline(ss, token, ':');
+		std::string state = token;
+
+		std::getline(ss, token, ':');
+		int time = std::stoi(token);
+
+		return { id, state, time };
+	}
+};
+} // namespace
