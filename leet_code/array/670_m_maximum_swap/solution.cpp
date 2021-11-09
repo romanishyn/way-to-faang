@@ -114,3 +114,71 @@ public:
     }
 };
 } // namespace
+
+namespace {
+/*
+Not optimal
+
+N - len(num)
+
+Time O(N)
+Space O(N)
+*/
+class Solution {
+public:
+	int maximumSwap(int num) {
+		auto strNum = std::to_string(num);
+		int size = strNum.size();
+		std::vector< int > maximum(size);
+		maximum[size - 1] = size - 1;
+		for (int i = size - 2; i >= 0; --i) {
+			if (strNum[i] <= strNum[maximum[i + 1]])
+				maximum[i] = maximum[i + 1];
+			else
+				maximum[i] = i;
+		}
+
+		for (int i = 0; i < size; ++i) {
+			if (strNum[i] < strNum[maximum[i]]) {
+				std::swap(strNum[i], strNum[maximum[i]]);
+				break;
+			}
+		}
+
+		return std::stoi(strNum);
+	}
+};
+} // namespace
+
+namespace {
+/*
+Not optimal
+
+N - len(num)
+
+Time O(N)
+Space O(N)
+*/
+class Solution {
+public:
+	int maximumSwap(int num) {
+		std::unordered_map< char, int > rightMostDigit;
+		auto numStr = std::to_string(num);
+		int size = numStr.size();
+
+		for (int i = 0; i < size; ++i)
+			rightMostDigit[numStr[i]] = std::max(rightMostDigit[numStr[i]], i);
+
+		for (int i = 0; i < size; ++i) {
+			for (char ch = '9'; numStr[i] < ch; --ch) {
+				if (rightMostDigit[ch] > i) {
+					std::swap(numStr[i], numStr[rightMostDigit[ch]]);
+					return std::stoi(numStr);
+				}
+			}
+		}
+
+		return std::stoi(numStr);
+	}
+};
+}
