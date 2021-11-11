@@ -406,3 +406,91 @@ public:
     }
 };
 } // namespace
+
+
+namespace {
+
+class Solution {
+public:
+	vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
+		std::unordered_map<std::string, std::string> emailToName;
+		std::unordered_map<std::string, int> emailToIdx;
+		UF uf(accounts.size());
+
+		for (int i = 0; i < accounts.size(); ++i) {
+			const auto& acc = accounts[i];
+			for (int j = 1; j < acc.size(); ++j) {
+				emailToName.try_emplace(acc[j], acc[0]);
+				emailToIdx.try_emplace(acc[j], j);
+				uf.unify(j, emailToIdx[acc[j]]);
+			}
+		}
+
+		std::vector< std::set< std::string > > groups(accounts.size());
+		for (const auto&[email, idx] : emailToIdx) {
+			groupgs[uf.find(idx)].insert(email);
+		}
+
+		std::vector< std::vector< std::string > > result;
+		for (const auto& group : groups) {
+			if (group.empty())
+				continue;
+
+			std::vector< std::string > acc;
+			acc.push_back(emailToName[group.front()]);
+			std::move(begin(group), end(group), std::back_inserter(acc));
+			result.push_back(std::move(acc));
+		}
+
+		return result;
+	}
+
+private:
+	class UF {
+		std::vector< int > sz;
+		std::vector< int > id;
+	
+	public:
+		UF(int size)
+			: sz( size, 1 )
+			, id( size  )
+		{
+			for (int i = 0; i < id.size(); ++i)
+				id[i] = i;
+		}
+
+		void unify(int p, int q) {
+			int pRoot = find(p);
+			int qRoot = find(q);
+
+			if (pRoot == qRoot)
+				return;
+
+			if (sz[pRoot] > sz[qRoot]) {
+				sz[pRoot] += sz[qRoot];
+				id[qRoot] = sz[pRoot];
+			}
+			else {
+				sz[qRoot] += sz[pRoot];
+				id[pRoot] = id[qRoot];
+			}
+		}
+
+		int find(int p) {
+			int root = p;
+			while (root != id[root]) {
+				root = id[root];
+			}
+
+			while (p != root) {
+				int next = id[p];
+				id[p] = root;
+				p = next;
+			}
+
+			return root;
+		}
+	};
+
+};
+} // namespace
