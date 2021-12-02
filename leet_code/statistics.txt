@@ -220,6 +220,9 @@ November
 29 - 162
 30 - 766
 
+December
+02 - 408
+
 Done with help:
 {238},    {53},     139,    337,    198,    213,    91,     207,    417,    128,
 57,     1029,   435,    54,     424,    76,     297,    235,    208,    295,
@@ -245,7 +248,7 @@ Done by myself but need attention:
 Top 50 Facebook + Facebook Tag
 Done with help:
 282,   +398,    +636,    +670,    721,    827,    10,     44,     51,     151,
-43,     38,     91
+43,     38,     91,		408
 
 Done by myself but need attention:
 384, 273, 621
