@@ -70,5 +70,43 @@ Approach: One pass
 Time O(N+M)
 Space O(N+M)
 */
+class Solution {
+	using Nodes = std::vector< TreeNode* >;
+public:
+	TreeNode* balanceBST(TreeNode* root) {
+		auto nodes = getNodes(root);
+		return getBalancedTree(0, nodes.size() - 1, nodes);
+	}
 
+private:
+	Nodes getNodes(TreeNode* root) {
+		Nodes nodes;
+		std::stack< TreeNode* > stack;
+		while (!stack.empty() || root) {
+			while (root) {
+				stack.push(root);
+				root = root->left;
+			}
+
+			root = stack.top();
+			stack.pop();
+
+			nodes.push_back(root);
+
+			root = root->right;
+		}
+		return nodes;
+	}
+
+	TreeNode* getBalancedTree(int left, int right, const Nodes& nodes) {
+		if (left > right)
+			return nullptr;
+
+		int mid = left + (right - left) / 2;
+		auto root = nodes[mid];
+		root->left = getBalancedTree(left, mid - 1, nodes);
+		root->right = getBalancedTree(mid + 1, right, nodes);
+		return root;
+	}
+	};
 } // namespace
